@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <title>New Tab</title>
+  <link href='normalize.css' rel='stylesheet' type='text/css' />
+  <link href='style.css' rel='stylesheet' type='text/css' />
+</head>
+
+<body>
+
+<div class='wrapper'>
+  <div class='masonry' id='links'></div>
+</div>
+
+<template id='item-template'>
+  <div class='item'>
+    <a href>
+      <div class='item-container'>
+        <span class='item-label'></span>
+      </div>
+    </a>
+  </div>
+</template>
+
+<template id='weather-template'>
+  <div class='item weather'>
+    <div class='item-container'>
+      <span class='weather-label'></span>
+      <div class='details'></div>
+    </div>
+  </div>
+</template>
+
+<script src='sites.js'></script>
+<script src='weather.js'></script>
+<script src='my-new-tab.js'></script>
+
+</body>

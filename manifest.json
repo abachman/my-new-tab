@@ -1,0 +1,14 @@
+{
+  "name": "My New Tab"
+, "version": "1.0.0"
+, "manifest_version": 2
+, "incognito": "split"
+, "chrome_url_overrides" : {
+    "newtab": "my-new-tab.html"
+  }
+, "description": "Build your own new tab page."
+, "permissions": [
+    "storage"
+  ]
+}
+
