@@ -12,3 +12,5 @@
 ```
 1. From chrome://extensions, enable **Developer mode** and the "Load unpacked extension..." button to load the extension.
 1. Done!
+
+Any changes you make should be picked up automatically.
