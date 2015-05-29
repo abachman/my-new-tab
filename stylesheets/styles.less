@@ -1,0 +1,166 @@
+.bg-dark {
+  .item {
+    color: #ffffff;
+  }
+  li a { color: #B3D8FD; }
+}
+
+.bg-light {
+  .item {
+    color: #333333;
+  }
+  li a { color: #337ab7; }
+}
+
+.item {
+  padding: 1em;
+
+  .item-container {
+    border-radius: 4px;
+
+    position: relative;
+    // border: 1px solid #ccc;
+    min-height: 200px;
+    // min-width: 240px;
+
+    .item-label {
+      display: inline-block;
+      padding: 10px;
+      color: #444444;
+      font-size: 18px;
+    }
+
+    .item-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+.item-preview {
+  .item {
+    width: 260px;
+    height: 200px;
+  }
+}
+
+h4 {
+  margin-top: 0px;
+}
+
+.item.weather {
+  .item-container {
+    position: relative;
+    // height: 180px;
+  }
+
+  .weather-title {
+    display:inline-block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-weight: bold;
+  }
+
+  .weather-date {
+    display:inline-block;
+    position: absolute;
+    top: 18px;
+    right: 0px;
+  }
+
+  .conditions {
+    position: absolute;
+    bottom: 18px;
+    left: 0px;
+    font-size: 16px;
+    font-weight: lighter;
+  }
+
+  .temperatures {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    .current-temp {
+      font-size: 48px;
+      padding-right: 18px;
+      margin-right: 18px;
+      border-right: 1px solid #eee;
+    }
+
+    .high-temp, .low-temp {
+      font-size: 22px;
+    }
+  }
+
+  .sunset {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+  }
+
+  .weather-logo {
+    position: absolute;
+    bottom: -2px;
+    right: 0px;
+    visibility: hidden;
+  }
+}
+
+// .bookmark-link {
+//   a.remove {
+//     color: red;
+//   }
+// }
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+// from Bootstrap
+// Small screen / tablet
+//** Deprecated `@screen-sm` as of v3.0.1
+@screen-sm:                  768px;
+@screen-sm-min:              @screen-sm;
+//** Deprecated `@screen-tablet` as of v3.0.1
+@screen-tablet:              @screen-sm-min;
+
+// Medium screen / desktop
+//** Deprecated `@screen-md` as of v3.0.1
+@screen-md:                  992px;
+@screen-md-min:              @screen-md;
+//** Deprecated `@screen-desktop` as of v3.0.1
+@screen-desktop:             @screen-md-min;
+
+// Large screen / wide desktop
+//** Deprecated `@screen-lg` as of v3.0.1
+@screen-lg:                  1200px;
+@screen-lg-min:              @screen-lg;
+//** Deprecated `@screen-lg-desktop` as of v3.0.1
+@screen-lg-desktop:          @screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max:              (@screen-sm-min - 1);
+@screen-sm-max:              (@screen-md-min - 1);
+@screen-md-max:              (@screen-lg-min - 1);
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+  .modal-dialog.wide-modal {
+    width: 740px;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+  .modal-dialog.wide-modal {
+    width: 960px;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {
+  .modal-dialog.wide-modal {
+    width: 1024px;
+  }
+}

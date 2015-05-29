@@ -9,6 +9,7 @@
 , "description": "Build your own new tab page."
 , "permissions": [
     "storage"
+    , "bookmarks"
   ]
 }
 

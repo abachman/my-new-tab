@@ -24,11 +24,78 @@ body {
   background: #fff;
   padding: 1em;
   margin: 0 0 1.5em;
-  width: 100%;
+  border: 1px solid #ccc;
+
+  /* width: 100%;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  box-shadow: 2px 2px 4px 0 #ccc;
+  box-shadow: 2px 2px 4px 0 #ccc; */
+
+  min-height: 200px;
+}
+
+h4 {
+  margin-top: 0px;
+}
+
+.item.weather .item-container {
+  position: relative;
+  height: 140px;
+}
+
+.item.weather .weather-title {
+  display:inline-block;
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  font-weight: bold;
+}
+.item.weather .weather-date {
+  display:inline-block;
+  position: absolute;
+  top: 22px;
+  right: 8px;
+}
+
+.item.weather .conditions {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.item.weather .current-temp {
+  position: absolute;
+  top: 22px;
+  left: 10px;
+  font-size: 48px;
+  font-weight: lighter;
+}
+
+.item.weather .temp-range {
+  position: absolute;
+  top: 24px;
+  left: 80px;
+  font-size: 22px;
+  border-left: 1px solid #eee;
+  padding-left: 18px;
+}
+.item.weather .high-temp { }
+.item.weather .low-temp { }
+
+.item.weather .sunset {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+}
+
+.item.weather .weather-logo {
+  position: absolute;
+  bottom: -2px;
+  right: 0px;
+  visibility: hidden;
 }
 
 /*
