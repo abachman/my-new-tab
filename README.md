@@ -1,16 +1,7 @@
 1. git clone
-1. Create sites.js in your working copy with the following form:
-```js
-(function () {
-  this.SITES = [
-    ['Reddit', 'https://reddit.com'],
-    ['Gmail', 'https://mail.google.com'],
-    ['Twitter', 'https://twitter.com'],
-    // ['label', 'URL'],
-  ]
-})();
-```
-1. From chrome://extensions, enable **Developer mode** and the "Load unpacked extension..." button to load the extension.
+1. From chrome://extensions, enable **Developer mode** and use the "Load unpacked extension..." button to load the extension.
+1. add links, bookmark pages, choose a weather location, add logos, whatever
 1. Done!
 
-Any changes you make should be picked up automatically.
+Any changes you make to the extension code should be picked up by Chrome
+automatically.
