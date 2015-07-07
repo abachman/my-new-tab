@@ -88,38 +88,43 @@
         }
       )
     }
-
   }
 
-  chrome.bookmarks.search(
-    'Reading List',
-    function (results) {
-      // console.log('[My New Tab bookmarks] got results', results)
-      if (results.length == 1) {
-        // console.log("[My New Tab] got Reading List", results[0])
-        renderWithFolder(results[0])
-        return
-      } else if (results.length > 1) {
-        // too many (shrug)
-        for (var result of results) {
-          if (typeof result.url === 'undefined') {
-            // pick first folder and bail
-            renderWithFolder(result)
-            return
+  window.hideReadingList = function () {
+    $('.bookmarks').remove()
+  }
+
+  window.renderReadingList = function () {
+    chrome.bookmarks.search(
+      'Reading List',
+      function (results) {
+        // console.log('[My New Tab bookmarks] got results', results)
+        if (results.length == 1) {
+          // console.log("[My New Tab] got Reading List", results[0])
+          renderWithFolder(results[0])
+          return
+        } else if (results.length > 1) {
+          // too many (shrug)
+          for (var result of results) {
+            if (typeof result.url === 'undefined') {
+              // pick first folder and bail
+              renderWithFolder(result)
+              return
+            }
           }
+        } else {
+          chrome.bookmarks.create(
+            {
+              'parentId': null,
+              'title': 'Reading List'
+            },
+            function(newFolder) {
+              console.log("[My New Tab] added folder: " + newFolder.title)
+              renderWithFolder(newFolder)
+            }
+          )
         }
-      } else {
-        chrome.bookmarks.create(
-          {
-            'parentId': null,
-            'title': 'Reading List'
-          },
-          function(newFolder) {
-            console.log("[My New Tab] added folder: " + newFolder.title)
-            renderWithFolder(newFolder)
-          }
-        )
       }
-    }
-  )
+    )
+  }
 })()

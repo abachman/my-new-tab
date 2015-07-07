@@ -19,6 +19,10 @@
     renderWeatherWidget()
   }
 
+  if (!settings.get('hide_reading_list')) {
+    renderReadingList()
+  }
+
   var Links = new LinkStore();
 
   var sizeCanvasToContainer = function (canvas) {
@@ -324,6 +328,12 @@
         } else {
           renderWeatherWidget()
         }
+      }
+
+      if (settings.get('hide_reading_list')) {
+        hideReadingList()
+      } else {
+        renderReadingList()
       }
     })
 

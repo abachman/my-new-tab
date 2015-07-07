@@ -38,6 +38,7 @@
       this.setInput('background_color', this.store.get('background_color'))
       this.setCheck('show_edit_by_default', this.store.get('show_edit_by_default'))
       this.setCheck('hide_weather', this.store.get('hide_weather'))
+      this.setCheck('hide_reading_list', this.store.get('hide_reading_list'))
 
       return this
     },
@@ -51,6 +52,7 @@
       this.store.set('background_color', this.getInput('background_color'))
       this.store.set('show_edit_by_default', this.getCheck('show_edit_by_default'))
       this.store.set('hide_weather', this.getCheck('hide_weather'))
+      this.store.set('hide_reading_list', this.getCheck('hide_reading_list'))
 
       this.trigger('changed')
     },
@@ -60,6 +62,7 @@
       this.store.set('background_color', this.getInput('background_color'))
       this.store.set('show_edit_by_default', this.getCheck('show_edit_by_default'))
       this.store.set('hide_weather', this.getCheck('hide_weather'))
+      this.store.set('hide_reading_list', this.getCheck('hide_reading_list'))
 
       this.trigger('updated')
     },
