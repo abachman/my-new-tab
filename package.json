@@ -1,0 +1,25 @@
+{
+  "name": "my-new-tab",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.6.1"
+  },
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-grid-layout": "^0.13.9",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0",
+    "redux-actions": "^0.12.0",
+    "redux-catch": "^1.2.0",
+    "redux-logger": "^2.7.0",
+    "redux-thunk": "^2.1.0"
+  },
+  "scripts": {
+    "start": "PORT=4001 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
