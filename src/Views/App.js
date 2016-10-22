@@ -3,8 +3,10 @@ import LinksGrid from './LinksGrid'
 import Controls from './Controls'
 import * as Forms from './Forms'
 
-import '../stylesheets/App.css'
 import '../stylesheets/bootstrap.min.css'
+import '../stylesheets/bootstrap_xl.css'
+
+import '../stylesheets/App.css'
 
 class App extends Component {
   render() {
