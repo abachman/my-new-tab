@@ -16,10 +16,16 @@ import '../stylesheets/Links.css'
 
 
 const BREAKPOINTS = {xl: 1800, lg: 1200, lmd: 1000, md: 800 , sm: 600 , xs: 400 , xxs: 0}
-const COLS =        {xl: 9,    lg: 6   , lmd: 5   , md: 4   , sm: 6   , xs: 2   , xxs: 2}
+const STEP = 120
+const COLS = {}
+Object.entries(BREAKPOINTS).forEach(kv => {
+  const [ lbl, sz ] = kv
+  COLS[lbl] = Math.floor(sz / STEP)
+})
 
-// The GRID
-class Links extends React.Component {
+
+
+class LinksGrid extends React.Component {
   static propTypes = {
     links: PropTypes.object.isRequired
   }
@@ -126,4 +132,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Links)
+export default connect(mapStateToProps)(LinksGrid)
