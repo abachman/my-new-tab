@@ -44,6 +44,8 @@ class Links extends React.Component {
       return <div />
     }
 
+    const ref = this.register.bind(this)
+
     return (
       <Modal show={true} onHide={this.props.close}>
         <Modal.Header closeButton>
@@ -51,33 +53,34 @@ class Links extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <form ref='form'>
-            <input ref={this.register.bind(this)} value={form.id} type='hidden' name='id'/>
+            <input ref={ref} value={form.id} type='hidden' name='id'/>
+            <input ref={ref} value={form.type} type='hidden' name='type'/>
             <div className="form-group">
               <label htmlFor="link_label" className="control-label">Label:</label>
-              <input ref={this.register.bind(this)} type="text" defaultValue={form.label} className="form-control" name="label"/>
+              <input ref={ref} type="text" defaultValue={form.label} className="form-control" name="label"/>
             </div>
             <div className="form-group">
               <label htmlFor="background_color" className="control-label">Color:</label>
-              <input ref={this.register.bind(this)} type="color" defaultValue={form.background_color} className="form-control" name="background_color"/>
+              <input ref={ref} type="color" defaultValue={form.background_color} className="form-control" name="background_color"/>
             </div>
             <div className="checkbox">
               <label>
-                <input ref={this.register.bind(this)} type="checkbox" defaultChecked={form.transparent_background === '1'} name="transparent_background" value='1' />
+                <input ref={ref} type="checkbox" defaultChecked={form.transparent_background === '1'} name="transparent_background" value='1' />
                 Transparent background
               </label>
             </div>
             <div className="form-group">
               <label htmlFor="link_url" className="control-label">URL:</label>
-              <input ref={this.register.bind(this)} type="url" defaultValue={form.url} className="form-control" name="url"/>
+              <input ref={ref} type="url" defaultValue={form.url} className="form-control" name="url"/>
             </div>
             <div className="form-group">
               <label htmlFor="image_upload">File input</label>
-              <input ref={this.register.bind(this)} type="file" id="image_upload"  name="image_upload"/>
+              <input ref={ref} type="file" id="image_upload"  name="image_upload"/>
               <p className="help-block">Upload a background image.</p>
             </div>
             <div className="checkbox">
               <label>
-                <input ref={this.register.bind(this)} type="checkbox" defaultChecked={form.hide_label === '1'} name="hide_label" value='1'/>
+                <input ref={ref} type="checkbox" defaultChecked={form.hide_label === '1'} name="hide_label" value='1'/>
                 Hide label
               </label>
             </div>
