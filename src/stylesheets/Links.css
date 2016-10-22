@@ -7,18 +7,20 @@
   margin-top: 8px;
 }
 
-.controls a {
+.controls a, .controls button {
   display: inline-block;
-  margin-right: 8px;
-}
-
-.item {
-  padding: 1em;
+  margin-right: 6px;
 }
 
 .item .item-container {
-  border-radius: 4px;
   position: relative;
+}
+
+.item .item-image {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .item .item-controls {

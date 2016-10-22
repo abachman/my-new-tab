@@ -10,18 +10,22 @@ class LinkImage extends React.Component {
   }
 
   render() {
+    const { width, height, link } = this.props
+    const style = {width: width + 'px', height: height + 'px'}
+    //   <pre style={style}>
+    //     <code>
+    //       {JSON.stringify(link, '  ')}
+    //     </code>
+    //   </pre>
     return (
-      <canvas className='item-image'></canvas>
+      <canvas className='item-image' width={width} height={height} style={style}></canvas>
     )
   }
 }
 
 const DragLayer = ({editing}) => {
   if (!editing) return null
-
-  return (
-    <div key='drag' className='drag-layer'/>
-  )
+  else          return <div key='drag' className='drag-layer'/>
 }
 
 class Link extends React.Component {
@@ -42,25 +46,27 @@ class Link extends React.Component {
   }
 
   render() {
-    const { size, editing } = this.props
-    const { label, url, image, background_color, hide_label, transparent_background } = this.props.link
+    const { size, editing, link } = this.props
+    const { label, url, image, background_color, hide_label, transparent_background } = link
 
-    let background = background_color
+    let background = background_color,
+        border = '1px solid transparent'
     if (transparent_background === '1' || !background) {
       background = 'transparent'
+      border = '1px solid black'
     }
 
     const labelClass = 'item-label ' + (Color.hexIsLight(background) ? 'dark' : 'light')
     const labelTag = <span className={labelClass}>{label}</span>
 
     return (
-      <div className='item link-item' style={{backgroundColor: background}}>
+      <div className='item link-item' style={{border, backgroundColor: background}}>
         {this.editButtons()}
         <DragLayer editing={editing} />
 
         <a className='link-link' href={url}>
           <div className='item-container'>
-            <LinkImage imageData={image} size={size} />
+            <LinkImage imageData={image} link={link} width={size.width} height={size.height} />
             { hide_label === '1' ? '' : labelTag }
           </div>
         </a>
