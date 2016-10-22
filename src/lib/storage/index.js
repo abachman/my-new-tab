@@ -140,6 +140,7 @@ const DB = new Database()
 
 export function persist(state, cb) {
   // simple persistence just plunks whole application state into storage
+  console.log("PERSIST", state)
   DB.set(state, cb)
 }
 
@@ -162,7 +163,12 @@ export function hydrate(defaultState, cb) {
 
       if (g_diff.length > 0) {
         console.error("stored state includes keys not present in default schema:", g_diff)
+
         // storage contains things we no longer care about, feel free to clean up
+        g_diff.forEach(stale => {
+          delete state[stale]
+        })
+
         cb(state)
       } else if (d_diff.length > 0) {
         console.error("default schema includes keys not present in stored state:", d_diff)

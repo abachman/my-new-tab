@@ -1,17 +1,7 @@
-function S4() {
-  return (((1+Math.random())*0x10000)|0).toString(16).substring(1)
-}
-
-// a unique enough ID
-function _newID() {
-  return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4()).toLowerCase();
-}
-
 // if we're in an extension, return that
 function StorageArea() {
   const chrome = window.chrome
   if (chrome && chrome.storage && chrome.storage.local) {
-    console.log('[StorageArea chrome]')
     return {
       mode: 'chrome',
       engine: chrome.storage.local
@@ -45,8 +35,6 @@ class Database {
 
           const sKey = this.storage.engine.key(i);
           var item = this.storage.engine.getItem(sKey)
-
-          console.log("[Database dump] iter", i, "got key", sKey, "val", item)
 
           try {
             item = JSON.parse(item)

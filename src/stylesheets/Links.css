@@ -1,0 +1,122 @@
+.bg-dark .item { color: #ffffff; }
+.bg-dark li a { color: #B3D8FD; }
+.bg-light .item { color: #333333; }
+.bg-light li a { color: #337ab7; }
+
+.controls {
+  margin-top: 8px;
+}
+
+.controls a {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.item {
+  padding: 1em;
+}
+
+.item .item-container {
+  border-radius: 4px;
+  position: relative;
+}
+
+.item .item-controls {
+  cursor: pointer;
+  text-align: right;
+  z-index: 12;
+
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  padding: 4px;
+  background: white;
+}
+
+.item .item-controls a {
+  margin-left: 8px;
+}
+
+.item .item-controls a:first-child {
+  margin-left: 0;
+}
+
+.item .link-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.item .item-container .item-label {
+  display: inline-block;
+  padding: 10px;
+  color: #444444;
+  font-size: 18px;
+}
+
+.item .item-container .item-label.light {
+  color: #FFFFFF;
+}
+
+.item .item-container .item-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.item-preview .item {
+  width: 260px;
+  height: 200px;
+}
+
+.item.weather .item-container {
+  position: relative;
+}
+
+.item.weather .weather-title {
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-weight: bold;
+}
+.item.weather .weather-date {
+  display: inline-block;
+  position: absolute;
+  top: 18px;
+  right: 0px;
+}
+.item.weather .conditions {
+  position: absolute;
+  bottom: 18px;
+  left: 0px;
+  font-size: 16px;
+  font-weight: lighter;
+}
+.item.weather .temperatures {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.item.weather .temperatures .current-temp {
+  font-size: 48px;
+  padding-right: 18px;
+  margin-right: 18px;
+  border-right: 1px solid #eee;
+}
+.item.weather .temperatures .high-temp,
+.item.weather .temperatures .low-temp {
+  font-size: 22px;
+}
+.item.weather .sunset {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+.item.weather .weather-logo {
+  position: absolute;
+  bottom: -2px;
+  right: 0px;
+  visibility: hidden;
+}
+

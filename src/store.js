@@ -7,7 +7,7 @@ import createLogger from 'redux-logger'
 const loggerMiddleware = createLogger({collapsed: () => true});
 const errorHandler = (error, getState) => { console.error(error) }
 
-import reducer from './reducers'
+import reducer, { DefaultState } from './reducers'
 
 // http://stackoverflow.com/questions/35305661/where-to-write-to-localstorage-in-a-redux-app
 //
@@ -29,11 +29,7 @@ import reducer from './reducers'
 import { persist, hydrate } from './lib/storage'
 
 export function initStore(cb) {
-  hydrate({
-    counter: 0,
-    links: {}
-  }, (initialState) => {
-
+  hydrate(DefaultState, (initialState) => {
     const store = createStore(
       reducer,
       initialState,
