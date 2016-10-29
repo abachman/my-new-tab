@@ -4,7 +4,11 @@ import { Responsive, WidthProvider, utils } from 'react-grid-layout';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 import Actions from '../actions'
-import Link from './Link'
+
+import Link from './Blocks/Link'
+import Weather from './Blocks/Weather'
+import Clock from './Blocks/Clock'
+import Bookmarks from './Blocks/Bookmarks'
 
 // lib
 import 'react-resizable/css/styles.css'
@@ -12,22 +16,22 @@ import 'react-grid-layout/css/styles.css'
 
 // custom
 import '../stylesheets/Grid.css'
-import '../stylesheets/Links.css'
+import '../stylesheets/Blocks.css'
 
 
-const BREAKPOINTS = {xl: 1800, lg: 1200, lmd: 1000, md: 800 , sm: 600 , xs: 400 , xxs: 0}
-const STEP = 120
+const STEP = 80
 const COLS = {}
-Object.entries(BREAKPOINTS).forEach(kv => {
-  const [ lbl, sz ] = kv
-  COLS[lbl] = Math.floor(sz / STEP)
-})
+const BREAKPOINTS = {}
+for (let i = 1; i < 16; i += 2) {
+  const lbl = 'col_' + i
+  COLS[lbl] = i
+  BREAKPOINTS[lbl] = i * STEP
+}
 
 
-
-class LinksGrid extends React.Component {
+class BlocksGrid extends React.Component {
   static propTypes = {
-    links: PropTypes.object.isRequired
+    blocks: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -45,28 +49,28 @@ class LinksGrid extends React.Component {
     }, 1000)
   }
 
-  updateLinkItem(item) {
+  updateBlockItem(item) {
     const id = item.i
 
-    this.props.dispatch(Actions.updateLink(id, {
+    this.props.dispatch(Actions.updateBlock(id, {
       coords: { ...item }
     }))
   }
 
   onDragStop(layout, oldItem, newItem) {
-    this.updateLinkItem(newItem)
+    this.updateBlockItem(newItem)
   }
 
   onResizeStop(layout, oldItem, newItem) {
-    this.updateLinkItem(newItem)
+    this.updateBlockItem(newItem)
   }
 
   render() {
-    const links = Object.entries(this.props.links).map((kv, idx) => {
+    const blocks = Object.entries(this.props.blocks).map((kv, idx) => {
       const id = kv[0],
-            link = kv[1];
+            block = kv[1];
 
-      let { coords } = link
+      let { coords } = block
 
       if (typeof coords === 'undefined') {
         coords = {
@@ -88,9 +92,29 @@ class LinksGrid extends React.Component {
         }
       }
 
+      let blockView = null
+      switch (block.type) {
+        case 'clock':
+          blockView = <Clock block={block} />
+          break;
+        case 'weather':
+          blockView = <Weather block={block} />
+          break;
+        case 'bookmarks':
+          blockView = <Bookmarks block={block} />
+          break;
+        case 'feed':
+        case 'link':
+          blockView = <Link block={block} />
+          break;
+        default:
+          blockView = <Link block={block} />
+          break;
+      }
+
       return (
         <div key={id} data-grid={coords}>
-          <Link link={link} />
+          { blockView }
         </div>
       )
     })
@@ -115,9 +139,9 @@ class LinksGrid extends React.Component {
         containerPadding={[0,0]}
 
         verticalCompact={true}
-        rowHeight={100}>
+        rowHeight={STEP / 2}>
 
-        {links}
+        {blocks}
 
       </ResponsiveReactGridLayout>
     )
@@ -127,9 +151,9 @@ class LinksGrid extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    links: state.links,
+    blocks: state.blocks,
     editing: state.layout.editing
   }
 }
 
-export default connect(mapStateToProps)(LinksGrid)
+export default connect(mapStateToProps)(BlocksGrid)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LinksGrid from './LinksGrid'
+import BlocksGrid from './BlocksGrid'
 import Controls from './Controls'
 import * as Forms from './Forms'
 
@@ -12,10 +12,10 @@ class App extends Component {
   render() {
     return (
       <div className="App container">
-        <LinksGrid />
+        <BlocksGrid />
         <Controls />
         <Forms.Settings />
-        <Forms.Links />
+        <Forms.Blocks />
       </div>
     );
   }

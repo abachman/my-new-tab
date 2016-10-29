@@ -79,7 +79,7 @@ class Database {
     }
   }
 
-  // items must be an object with
+  // `items` must be an object with string keys
   set(items, cb) {
     if (typeof cb === 'undefined')
       cb = () => (null)

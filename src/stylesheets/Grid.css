@@ -1,16 +1,16 @@
 
-.link-item {
+.block-item {
   border-radius: 4px;
   height: 100%;
   width: 100%;
 }
 
-.link-item.editing {
+.block-item.editing {
   border: 1px dashed black;
   cursor: move;
 }
 
-.link-item .drag-layer {
+.block-item .drag-layer {
   position: absolute;
   top: 0px;
   left: 0px;

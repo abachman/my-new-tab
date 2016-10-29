@@ -44,7 +44,8 @@ export function initStore(cb) {
       persist(store.getState())
     })
 
-    cb(store)
+    store.dispatch({type: 'INITIALIZE_EVERYTHING'})
 
+    cb(store)
   })
 }

@@ -1,0 +1,65 @@
+/* WEATHER */
+
+.item.weather .item-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.item.weather .temperatures {
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.weather .top-right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 18px;
+  text-align: right;
+}
+
+.weather .bottom-left {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding: 18px;
+}
+
+.item.weather .weather-title {
+  font-weight: bold;
+}
+
+.item.weather .weather-date { }
+.item.weather .sunset { }
+
+.item.weather .conditions {
+  font-size: 24px;
+  font-weight: lighter;
+}
+
+.weather .temperatures td,
+.weather .temperatures tr {
+  border: 0px;
+}
+
+.item.weather .temperatures .current-temp {
+  font-size: 48px;
+  padding-left: 18px;
+  margin-right: 18px;
+}
+
+.item.weather .temperatures .high-temp,
+.item.weather .temperatures .low-temp {
+  font-size: 22px;
+}
+
+.item.weather .weather-logo {
+  position: absolute;
+  bottom: -2px;
+  right: 0px;
+  visibility: hidden;
+}

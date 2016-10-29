@@ -11,6 +11,9 @@ class Settings extends React.Component {
     form: PropTypes.object
   }
 
+  save() {
+  }
+
   render() {
     const { editing } = this.props
 
@@ -19,7 +22,7 @@ class Settings extends React.Component {
     }
 
     return (
-      <Modal onHide={this.props.close}>
+      <Modal show={editing} onHide={this.props.close}>
         <Modal.Header closeButton>
           <Modal.Title>SETTINGS</Modal.Title>
         </Modal.Header>
@@ -29,8 +32,8 @@ class Settings extends React.Component {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button>Cancel</Button>
-          <Button bsStyle='primary'>Save</Button>
+          <Button onClick={this.props.close}>Cancel</Button>
+          <Button onClick={this.save.bind(this)} bsStyle='primary'>Save</Button>
         </Modal.Footer>
       </Modal>
     )

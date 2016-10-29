@@ -1,0 +1,50 @@
+.bg-dark .item-container,
+.bg-dark .item-container a { color: #ffffff; }
+.bg-light .item-container,
+.bg-light .item-container a { color: #333333; }
+
+.controls {
+  margin-top: 8px;
+}
+
+.controls a, .controls button {
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.item .item-container {
+  position: relative;
+}
+
+.item .item-image {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.item .item-controls {
+  z-index: 12;
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+}
+
+.item .link-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.item .item-container .item-label {
+  display: inline-block;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.item-preview .item {
+  width: 260px;
+  height: 200px;
+}
+
+

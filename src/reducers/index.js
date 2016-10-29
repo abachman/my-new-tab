@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 
 const DefaultState = {
-  links: {},
+  blocks: {},
 
   settings: {},
 
@@ -11,36 +11,40 @@ const DefaultState = {
     editing: false,
   },
 
+  feeds: {},
+  weathers: {},
+  bookmarks: {},
+
   forms: {
-    links: { visible: false, form: {} },
+    blocks: { visible: false, form: {} },
     settings: { visible: false, form: {} },
   }
 }
 
-const links = handleActions({
-  CREATE_LINK(state, { payload }) {
+const blocks = handleActions({
+  CREATE_BLOCK(state, { payload }) {
     return Object.assign({}, state, {
       [payload.id]: payload
     })
   },
 
-  UPDATE_LINK(state, { payload }) {
+  UPDATE_BLOCK(state, { payload }) {
     return Object.assign({}, state, {
       [payload.id]: payload
     })
   },
 
-  DESTROY_LINK(state, { payload }) {
-    const nextLinks = {}
+  DESTROY_BLOCK(state, { payload }) {
+    const nextBlocks = {}
 
     Object.entries(state).forEach((kv) => {
-      // leave out the deleted link
+      // leave out the deleted block
       if (kv[0] !== payload.id) {
-        nextLinks[kv[0]] = kv[1]
+        nextBlocks[kv[0]] = kv[1]
       }
     })
 
-    return nextLinks
+    return nextBlocks
   }
 }, null)
 
@@ -59,9 +63,9 @@ const settings = handleActions({
 }, null)
 
 const forms = handleActions({
-  TOGGLE_LINK_EDITOR(state, { payload }) {
+  TOGGLE_BLOCK_EDITOR(state, { payload }) {
     return Object.assign({}, state, {
-      links: Object.assign({}, state.links, payload)
+      blocks: Object.assign({}, state.blocks, payload)
     })
   },
 
@@ -72,10 +76,32 @@ const forms = handleActions({
   }
 }, null)
 
+const weathers = handleActions({
+  // INITIALIZE_EVERYTHING(state, { payload }) {
+  //   return {}
+  // },
+
+  WEATHER_LOADED(state, { payload }) {
+    return Object.assign({}, state, {
+      [ payload.id ]: {
+        loadedAt: Date.now(),
+        ...payload.content
+      }
+    })
+  },
+}, null)
+
+const bookmarks = handleActions({ }, null)
+
+const feeds = handleActions({ }, null)
+
 export default combineReducers({
-  links,
+  blocks,
   layout,
   settings,
+  weathers,
+  bookmarks,
+  feeds,
   forms
 })
 

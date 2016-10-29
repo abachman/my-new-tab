@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import MenuItem from 'react-bootstrap/lib/MenuItem'
 import Dropdown from 'react-bootstrap/lib/Dropdown'
+import Button from 'react-bootstrap/lib/Button'
 
+import Tip from '../components/Tip'
 import Actions from '../actions'
 
 const CreateMenu = ({ onCreate }) => {
@@ -16,7 +18,8 @@ const CreateMenu = ({ onCreate }) => {
         <MenuItem onClick={() => onCreate('link')}>Link</MenuItem>
         <MenuItem onClick={() => onCreate('weather')}>Weather</MenuItem>
         <MenuItem onClick={() => onCreate('bookmarks')}>Bookmarks</MenuItem>
-        <MenuItem onClick={() => onCreate('feed')}>News Feed</MenuItem>
+        <MenuItem onClick={() => onCreate('clock')}>Clock</MenuItem>
+        {/* <MenuItem onClick={() => onCreate('feed')}>News Feed</MenuItem> */}
       </Dropdown.Menu>
     </Dropdown>
   );
@@ -30,13 +33,22 @@ class Controls extends React.Component {
   }
 
   render() {
+    const { editing } = this.props
+
     return (
       <div className='row controls'>
         <div className='col-md-12'>
           <CreateMenu onCreate={type => this.props.add(type)} />
-          <a onClick={this.toggleEditing.bind(this)} className='btn btn-info edit-items-js' title='Edit'><span className='glyphicon glyphicon-pencil'></span></a>
-          <a onClick={this.props.editSettings} className='btn btn-default edit-settings-js' title='Settings'><span className='glyphicon glyphicon-wrench'></span></a>
-          <a onClick={this.props.download} className='btn btn-default export-items-js' title='Download'><span className='glyphicon glyphicon-download-alt'></span></a>
+
+          <Tip label='Toggle editing mode'>
+            <Button onClick={this.toggleEditing.bind(this)} bsStyle='info' title='Edit' active={editing}><Glyphicon glyph='pencil'/></Button>
+          </Tip>
+          {/* <Tip label='Edit settings'>
+            <Button onClick={this.props.editSettings}       bsStyle='default' title='Settings'><Glyphicon glyph='wrench'/></Button>
+          </Tip> */}
+          <Tip label='Download layout'>
+            <Button onClick={this.props.download}           bsStyle='default' title='Download'><Glyphicon glyph='download-alt'/></Button>
+          </Tip>
         </div>
       </div>
     )
@@ -49,7 +61,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   add(type) {
-    return dispatch(Actions.toggleLinkEditor({
+    return dispatch(Actions.toggleBlockEditor({
       visible: true,
       form: { type }
     }))

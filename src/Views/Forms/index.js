@@ -1,4 +1,4 @@
-import Links from './Links'
+import Blocks from './Blocks/index'
 import Settings from './Settings'
 
-export { Links, Settings }
+export { Blocks, Settings }
