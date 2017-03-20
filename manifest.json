@@ -1,18 +1,28 @@
 {
-  "name": "My New Tab",
-  "version": "1.0.0",
   "manifest_version": 2,
-  "incognito": "split",
+
+  "name":       "My New Tab - The simplest customizable new tab page.",
+  "short_name": "My New Tab",
+  "description": "Build your own new tab page. Simple, no frills, no ads. Your data is yours.",
+  "version": "1.0.0",
+
+  "default_locale": "en",
+  "icons": {
+    "128": "icon.png"
+  },
+
+  "author": "Adam Bachman",
+  "homepage_url": "https://github.com/abachman/my-new-tab",
+
   "chrome_url_overrides" : {
     "newtab": "index.html"
   },
-  "icons": {
-    "128": "app-icon-128.png"
-  },
-  "description": "Build your own new tab page.",
+
   "web_accessible_resources": [
     "static/*"
   ],
+
+  "incognito": "split",
   "permissions": [
     "storage",
     "bookmarks"

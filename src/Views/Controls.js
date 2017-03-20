@@ -43,12 +43,18 @@ class Controls extends React.Component {
           <Tip label='Toggle editing mode'>
             <Button onClick={this.toggleEditing.bind(this)} bsStyle='info' title='Edit' active={editing}><Glyphicon glyph='pencil'/></Button>
           </Tip>
-          {/* <Tip label='Edit settings'>
+
+          {/*
+          <Tip label='Edit settings'>
             <Button onClick={this.props.editSettings}       bsStyle='default' title='Settings'><Glyphicon glyph='wrench'/></Button>
-          </Tip> */}
+          </Tip>
+          */}
+
+          {/*
           <Tip label='Download layout'>
             <Button onClick={this.props.download}           bsStyle='default' title='Download'><Glyphicon glyph='download-alt'/></Button>
           </Tip>
+          */}
         </div>
       </div>
     )

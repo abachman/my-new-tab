@@ -29,9 +29,11 @@ This creates the `build/` directory and copies manifest.json into it. If you wan
 
 ## TODO
 
-- [] main layout
-- [] layout editing
 - [] update settings
-- [] create links
-- [] update links
->>>>>>> now-in-react
+- [] bookmarks block
+
+## Distant Future
+
+- [] simple news reading
+- [] reminders / todo
+- [] sticky notes
