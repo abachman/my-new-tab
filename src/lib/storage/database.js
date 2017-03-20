@@ -20,7 +20,18 @@ class Database {
     this.storage = StorageArea()
   }
 
-  dump(cb) {
+  dump(...args) {
+    let key, cb
+    if (args.length === 2) {
+      [ key, cb ] = args
+    } else {
+      [ key, cb ] = [ null, args[0] ]
+    }
+
+    if (key) {
+      return this.get(key, cb);
+    }
+
     switch (this.storage.mode) {
       case 'chrome':
         // easy!

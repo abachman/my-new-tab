@@ -4,10 +4,10 @@ import Button from 'react-bootstrap/lib/Button'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup'
 
-import Color from '../../lib/Color'
-import Actions from '../../actions'
-import sized from '../../components/sized'
-import Tip from '../../components/Tip'
+import Color from 'lib/Color'
+import Actions from 'actions'
+import sized from 'components/sized'
+import Tip from 'components/Tip'
 
 const DragLayer = ({editing}) => {
   if (!editing) return null
@@ -52,25 +52,36 @@ export var GridBlockWrapper = Subtype => {
     style() {
       const { background_color, transparent_background } = this.props.block
 
-      let background = background_color,
-          border = 'none';
+      let background = background_color
 
       if (transparent_background === '1' || !background) {
         background = 'transparent'
       }
 
-      return { background, border }
+      return { background }
     }
 
     bgClass() {
       return Color.hexIsLight(this.style().background) ? 'bg-light' : 'bg-dark'
     }
 
+    borderClass() {
+      return this.props.block.show_border === '1' ? 'bordered' : ''
+    }
+
+    debugButton() {
+      if (process.env.NODE_ENV === 'development') {
+        // return <a className='dbg' onClick={() => console.log('DBG', {props: this.props, block: this.props.block})}>debug</a>
+      }
+      return null;
+    }
+
     render() {
-      const className = `item block-item ${this.bgClass()} ${this.props.block.type}`
+      const className = `item block-item ${this.bgClass()} ${this.borderClass()} ${this.props.block.type}`
       return (
         <div className={className} style={this.style()}>
           {this.editButtons()}
+          {this.debugButton()}
           <DragLayer  {...this.props} />
           <Subtype {...this.props} styles={this.style()} />
         </div>
@@ -91,7 +102,7 @@ export var GridBlockWrapper = Subtype => {
     },
 
     destroy(block) {
-      return dispatch(Actions.destroyLink(block))
+      return dispatch(Actions.destroyBlock(block))
     }
   })
 

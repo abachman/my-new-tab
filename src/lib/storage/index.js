@@ -5,7 +5,7 @@ const DB = new Database()
 export function persist(state, cb) {
   // simple persistence just plunks whole application state into storage
   // console.log("PERSIST", state)
-  DB.set(state, cb)
+  DB.set({ '__my_new_tab': state }, cb)
 }
 
 function difference(a, b) {
@@ -15,7 +15,7 @@ function difference(a, b) {
 
 export function hydrate(defaultState, cb) {
   // get full dump of storage
-  DB.dump((state) => {
+  DB.dump('__my_new_tab', (state) => {
 
     if (state && typeof state === 'object') {
 
@@ -26,16 +26,12 @@ export function hydrate(defaultState, cb) {
       const g_diff = difference(given, defaults)
 
       if (g_diff.length > 0) {
-        console.error("stored state includes keys not present in default schema:", g_diff)
-
         // storage contains things we no longer care about, feel free to clean up
         g_diff.forEach(stale => {
           delete state[stale]
         })
-
         cb(state)
       } else if (d_diff.length > 0) {
-        console.error("default schema includes keys not present in stored state:", d_diff)
         // set defaults and go
         cb(Object.assign({}, state, defaultState))
       } else {

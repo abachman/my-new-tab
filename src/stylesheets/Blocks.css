@@ -1,7 +1,20 @@
 .bg-dark .item-container,
+.bg-dark .item-container p,
 .bg-dark .item-container a { color: #ffffff; }
+
 .bg-light .item-container,
+.bg-light .item-container p,
 .bg-light .item-container a { color: #333333; }
+
+.item a.dbg {
+  display: block;
+  background: black;
+  color: green;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9001;
+}
 
 .controls {
   margin-top: 8px;
@@ -38,8 +51,10 @@
 
 .item .item-container .item-label {
   display: inline-block;
-  padding: 10px;
+  padding: 8px;
+  padding-top: 6px;
   font-size: 18px;
+  line-height: 1em;
 }
 
 .item-preview .item {
@@ -47,4 +62,11 @@
   height: 200px;
 }
 
+.block-item {
+  border: 1px solid transparent;
+}
+
+.block-item.bordered {
+  border: 1px solid #333333;
+}
 

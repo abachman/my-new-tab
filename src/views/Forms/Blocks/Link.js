@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
 
+import Color from 'lib/Color'
+
 // Block editing form wrapper
 export default class Link extends React.Component {
   static propTypes = {
@@ -11,6 +13,9 @@ export default class Link extends React.Component {
     const { refCb, form } = this.props
     const ref = refCb
 
+    const defaultColor =
+      Color.valid(form.background_color) ? form.background_color : Color.random(0.4);
+
     return (
       <form rel='form'>
         <div className="form-group">
@@ -19,12 +24,18 @@ export default class Link extends React.Component {
         </div>
         <div className="form-group">
           <label htmlFor="background_color" className="control-label">Color:</label>
-          <input ref={ref} type="color" defaultValue={form.background_color} className="form-control" name="background_color"/>
+          <input ref={ref} type="color" defaultValue={defaultColor} className="form-control" name="background_color"/>
         </div>
         <div className="checkbox">
           <label>
             <input ref={ref} type="checkbox" defaultChecked={form.transparent_background === '1'} name="transparent_background" value='1' />
             Transparent background
+          </label>
+        </div>
+        <div className="checkbox">
+          <label>
+            <input ref={ref} type="checkbox" defaultChecked={form.show_border === '1'} name="show_border" value='1' />
+            Show border
           </label>
         </div>
         <div className="form-group">

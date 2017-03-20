@@ -37,23 +37,6 @@ class Blocks extends React.Component {
         } else {
           console.log('no files for', f)
         }
-       /*
-        * var image = $w.find('input[name=image_upload]')
-        * if (linkItem) {
-        *   // update existing link
-        *   if (image[0].files && image[0].files[0]) {
-        *     UploadImage(image[0], function (dataUrl) {
-        *       item.imageData = dataUrl
-        *       var link = Links.update(id, item)
-        *       refreshLink(link)
-        *     });
-        *   } else {
-        *     var link = Links.update(id, item)
-        *     refreshLink(link)
-        *     // update in page if it has already been rendered
-        *   }
-        */
-
       } else {
         form[f.name] = f.value
       }
@@ -61,6 +44,7 @@ class Blocks extends React.Component {
 
     const finish = (fm) => {
       this.props.save(fm)
+      console.log("RESET FORM")
       this.fields = {}
       this.props.close()
     }
@@ -112,6 +96,7 @@ class Blocks extends React.Component {
         <Modal.Body>
           <input ref={ref} value={form.id} type='hidden' name='id'/>
           <input ref={ref} value={form.type} type='hidden' name='type'/>
+
           { this.form() }
 
           <div ref='item_preview' className='row'></div>

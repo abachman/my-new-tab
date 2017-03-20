@@ -3,20 +3,21 @@ import { connect } from 'react-redux'
 import { Responsive, WidthProvider, utils } from 'react-grid-layout';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-import Actions from '../actions'
+import Actions from 'actions'
 
 import Link from './Blocks/Link'
 import Weather from './Blocks/Weather'
 import Clock from './Blocks/Clock'
 import Bookmarks from './Blocks/Bookmarks'
+import sized from 'components/sized'
 
 // lib
 import 'react-resizable/css/styles.css'
 import 'react-grid-layout/css/styles.css'
 
 // custom
-import '../stylesheets/Grid.css'
-import '../stylesheets/Blocks.css'
+import 'stylesheets/Grid.css'
+import 'stylesheets/Blocks.css'
 
 
 const STEP = 80
@@ -76,13 +77,13 @@ class BlocksGrid extends React.Component {
         coords = {
           x: null,
           y: null,
-          w: 1,
+          w: 2,
           h: 2
         }
       }
 
       // modify coords if this is a new item
-      if (coords.x === null) {
+      if (coords.x === null || typeof coords.x === 'undefined') {
         coords.x = 0
 
         if (this.state.layout) {
@@ -139,7 +140,7 @@ class BlocksGrid extends React.Component {
         containerPadding={[0,0]}
 
         verticalCompact={true}
-        rowHeight={STEP / 2}>
+        rowHeight={STEP}>
 
         {blocks}
 
@@ -156,4 +157,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(BlocksGrid)
+export default connect(mapStateToProps)(sized(BlocksGrid))
