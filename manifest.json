@@ -1,12 +1,11 @@
 {
   "manifest_version": 2,
 
-  "name":       "My New Tab - The simplest customizable new tab page.",
+  "name":       "My New Tab",
   "short_name": "My New Tab",
-  "description": "Build your own new tab page. Simple, no frills, no ads. Your data is yours.",
+  "description": "My New Tab is the simplest and safest custom new tab page replacement. No frills, no ads, your links and information belong to you.",
   "version": "1.0.0",
 
-  "default_locale": "en",
   "icons": {
     "128": "icon.png"
   },
@@ -24,8 +23,7 @@
 
   "incognito": "split",
   "permissions": [
-    "storage",
-    "bookmarks"
+    "storage"
   ]
 }
 

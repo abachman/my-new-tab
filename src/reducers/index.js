@@ -46,7 +46,7 @@ const blocks = handleActions({
 
     return nextBlocks
   }
-}, null)
+}, DefaultState.blocks)
 
 const layout = handleActions({
   TOGGLE_EDITING(state, { payload }) {
@@ -54,13 +54,13 @@ const layout = handleActions({
       editing: payload
     })
   },
-}, null)
+}, DefaultState.layout)
 
 const settings = handleActions({
   UPDATE_SETTINGS(state, { payload }) {
     return payload
   }
-}, null)
+}, DefaultState.settings)
 
 const forms = handleActions({
   TOGGLE_BLOCK_EDITOR(state, { payload }) {
@@ -74,7 +74,7 @@ const forms = handleActions({
       settings: Object.assign({}, state.settings, payload)
     })
   }
-}, null)
+}, DefaultState.forms)
 
 const weathers = handleActions({
   // INITIALIZE_EVERYTHING(state, { payload }) {
@@ -89,11 +89,11 @@ const weathers = handleActions({
       }
     })
   },
-}, null)
+}, DefaultState.weathers)
 
-const bookmarks = handleActions({ }, null)
+const bookmarks = handleActions({ }, DefaultState.bookmarks)
 
-const feeds = handleActions({ }, null)
+const feeds = handleActions({ }, DefaultState.feeds)
 
 export default combineReducers({
   blocks,

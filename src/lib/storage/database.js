@@ -20,52 +20,6 @@ class Database {
     this.storage = StorageArea()
   }
 
-  dump(...args) {
-    let key, cb
-    if (args.length === 2) {
-      [ key, cb ] = args
-    } else {
-      [ key, cb ] = [ null, args[0] ]
-    }
-
-    if (key) {
-      return this.get(key, cb);
-    }
-
-    switch (this.storage.mode) {
-      case 'chrome':
-        // easy!
-        return this.storage.engine.get(null, cb)
-
-      case 'local':
-        let dumpOut = null
-
-        for (let i=0; i < this.storage.engine.length; i++ ) {
-          // dumpOut should remain null unless records exist
-          dumpOut = dumpOut || {}
-
-          const sKey = this.storage.engine.key(i);
-          var item = this.storage.engine.getItem(sKey)
-
-          try {
-            item = JSON.parse(item)
-          } catch (ex) {
-            console.error('[Database get] failed to get item with key', sKey)
-            console.error(ex)
-            item = null
-          }
-
-          dumpOut[sKey] = item
-        }
-
-        return cb(dumpOut)
-
-      default:
-        console.error('[Database get] unknown engine')
-        return cb(null)
-    }
-  }
-
   // takes a key and a callback, callback should expect the result of the get() operation
   get(key, cb) {
     switch (this.storage.mode) {
@@ -82,7 +36,11 @@ class Database {
           console.error(ex)
           item = null
         }
-        return cb(item)
+
+        let returns = {}
+        returns[key] = item
+
+        return cb(returns)
 
       default:
         console.error('[Database get] unknown engine')

@@ -15,9 +15,10 @@ function difference(a, b) {
 
 export function hydrate(defaultState, cb) {
   // get full dump of storage
-  DB.dump('__my_new_tab', (state) => {
+  DB.get('__my_new_tab', (existing) => {
+    let state = existing['__my_new_tab']
 
-    if (state && typeof state === 'object') {
+    if (state && typeof state === 'object' && Object.keys(state).length > 0) {
 
       const defaults = Object.keys(defaultState)
       const given = Object.keys(state)
