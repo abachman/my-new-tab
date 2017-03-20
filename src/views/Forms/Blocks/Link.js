@@ -43,7 +43,7 @@ export default class Link extends React.Component {
           <input ref={ref} type="url" defaultValue={form.url} className="form-control" name="url"/>
         </div>
         <div className="form-group">
-          <label htmlFor="image_upload">File input</label>
+          <label htmlFor="image_upload">Icon image:</label>
           <input ref={ref} type="file" id="image_upload"  name="image_upload"/>
           <p className="help-block">Upload a background image.</p>
         </div>
