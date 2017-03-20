@@ -1,0 +1,18 @@
+.clock .item-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+.clock .item-container .clock-time {
+  flex: 1;
+  text-align: center;
+  max-width: 90%;
+}
+
+.clock-time .time {
+  line-height: 0.8em;
+}

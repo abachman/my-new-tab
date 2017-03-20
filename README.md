@@ -1,7 +1,37 @@
-1. git clone
-1. From chrome://extensions, enable **Developer mode** and use the "Load unpacked extension..." button to load the extension.
-1. add links, bookmark pages, choose a weather location, add logos, whatever
-1. Done!
+# My New Tab
 
-Any changes you make to the extension code should be picked up by Chrome
-automatically.
+A simple, clean, custom Chrome new tab page. If you're using the extension from the Chrome app store, all settings are synced across all your devices.
+
+This is me playing with `create-react-app`, React, Redux, yarn. The whole pile / stack.
+
+
+## Developing
+
+Download and install dependencies:
+
+    $ yarn
+
+Run create-react-app in development mode:
+
+    $ yarn start
+
+Make changes, be mind boggled!
+
+
+## Building
+
+Run make:
+
+    $ make
+
+This creates the `build/` directory and copies manifest.json into it. If you want to load the unpacked extension, point Chrome at `build/`.
+
+
+## TODO
+
+- [] main layout
+- [] layout editing
+- [] update settings
+- [] create links
+- [] update links
+>>>>>>> now-in-react

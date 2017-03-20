@@ -1,15 +1,21 @@
 {
-  "name": "My New Tab"
-, "version": "1.0.0"
-, "manifest_version": 2
-, "incognito": "split"
-, "chrome_url_overrides" : {
-    "newtab": "my-new-tab.html"
-  }
-, "description": "Build your own new tab page."
-, "permissions": [
-    "storage"
-    , "bookmarks"
+  "name": "My New Tab",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "incognito": "split",
+  "chrome_url_overrides" : {
+    "newtab": "index.html"
+  },
+  "icons": {
+    "128": "app-icon-128.png"
+  },
+  "description": "Build your own new tab page.",
+  "web_accessible_resources": [
+    "static/*"
+  ],
+  "permissions": [
+    "storage",
+    "bookmarks"
   ]
 }
 
