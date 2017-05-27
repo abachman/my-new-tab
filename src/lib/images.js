@@ -7,12 +7,12 @@ const imageFit = function (w1, h1, w2, h2) {
 
   if (w1 >= w2) {
     // scale for a snug width
-    wscale = w2 / w1
+    wscale = (w2 / w1) * 0.95
   }
 
   if (h1 >= h2) {
     // scale for a snug height
-    hscale = h2 / h1
+    hscale = (h2 / h1) * 0.95
   }
 
   // choose smallest scale
