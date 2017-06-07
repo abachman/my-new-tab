@@ -21,6 +21,10 @@
     "static/*"
   ],
 
+  "sandbox": {
+    "pages": ["userscript.html"]
+  },
+
   "incognito": "split",
   "permissions": [
     "storage"

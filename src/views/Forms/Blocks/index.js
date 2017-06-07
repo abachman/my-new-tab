@@ -7,6 +7,7 @@ import { uploadImage } from '../../../lib/images'
 import Link from './Link'
 import Weather from './Weather'
 import Clock from './Clock'
+import Userscript from './Userscript'
 
 import Actions from '../../../actions'
 
@@ -74,6 +75,8 @@ class Blocks extends React.Component {
         return <Weather refCb={this.register.bind(this)} form={form} />
       case 'link':
         return <Link refCb={this.register.bind(this)} form={form} />
+      case 'userscript':
+        return <Userscript refCb={this.register.bind(this)} form={form} />
       default:
         return <Link refCb={this.register.bind(this)} form={form} />
     }

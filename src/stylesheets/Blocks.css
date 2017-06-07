@@ -43,6 +43,13 @@
   right: 6px;
 }
 
+.item .script-block {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .item .link-link {
   display: block;
   width: 100%;
@@ -68,5 +75,10 @@
 
 .block-item.bordered {
   border: 1px solid #333333;
+}
+
+.script-block .result {
+  height: 100%;
+  width: 100%;
 }
 

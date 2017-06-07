@@ -9,6 +9,7 @@ import Link from './Blocks/Link'
 import Weather from './Blocks/Weather'
 import Clock from './Blocks/Clock'
 import Bookmarks from './Blocks/Bookmarks'
+import Userscript from './Blocks/Userscript'
 import sized from 'components/sized'
 
 // lib
@@ -107,6 +108,9 @@ class BlocksGrid extends React.Component {
         case 'feed':
         case 'link':
           blockView = <Link block={block} />
+          break;
+        case 'userscript':
+          blockView = <Userscript block={block} />
           break;
         default:
           blockView = <Link block={block} />

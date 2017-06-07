@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+    <script>
+      // Set up message event handler:
+      console.log('sandbox setting up')
+      window.addEventListener('message', function(event) {
+        console.log('sandbox got window message', event)
+
+        var sender = event.data.sender;
+        var domId = event.data.domId;
+        var code = event.data.code;
+        var size = event.data.size
+        var userfunc = null
+
+        try {
+          userfunc = eval("var ufunc = " + code + "; ufunc");
+          console.log("found userfunc", userfunc)
+        } catch(ex) {
+          console.error("eval error", ex)
+          userfunc = function (cb) { cb("failed to execute code: " + ex.message) }
+        }
+
+        userfunc(function (html) {
+          event.source.postMessage({
+            sender: sender,
+            html: html
+          }, event.origin);
+        }, domId, size)
+      });
+    </script>
+  </body>
+</html>
+
