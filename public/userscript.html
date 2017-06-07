@@ -5,9 +5,9 @@
   <body>
     <script>
       // Set up message event handler:
-      console.log('sandbox setting up')
+      // console.log('sandbox setting up')
       window.addEventListener('message', function(event) {
-        console.log('sandbox got window message', event)
+        // console.log('sandbox got window message', event)
 
         var sender = event.data.sender;
         var domId = event.data.domId;
@@ -17,7 +17,7 @@
 
         try {
           userfunc = eval("var ufunc = " + code + "; ufunc");
-          console.log("found userfunc", userfunc)
+          // console.log("found userfunc", userfunc)
         } catch(ex) {
           console.error("eval error", ex)
           userfunc = function (cb) { cb("failed to execute code: " + ex.message) }

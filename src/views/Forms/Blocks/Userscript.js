@@ -27,8 +27,8 @@ export default class Userscript extends React.Component {
             be rendered into.
           </span>
           <span className="help-block">
-            Check out <a href='https://github.com/oneuijs/You-Dont-Need-jQuery'>You Don't Need jQuery</a>
-            for help writing vanilla javascript and check out some <a href='https://gist.github.com/abachman/bd5b5acfd6b51352c0e42b742e039644'>sample userscripts on GitHub.</a>
+            Check out <a href='https://github.com/oneuijs/You-Dont-Need-jQuery'>You Don't Need jQuery</a> for
+            help writing vanilla javascript and check out some <a href='https://gist.github.com/abachman/bd5b5acfd6b51352c0e42b742e039644'>sample userscripts on GitHub.</a>
           </span>
         </div>
       </form>

@@ -35,8 +35,6 @@ class Blocks extends React.Component {
       } else if (f.type === 'file') {
         if (f.files && f.files[0]) {
           imageField = f
-        } else {
-          console.log('no files for', f)
         }
       } else {
         form[f.name] = f.value
@@ -45,7 +43,7 @@ class Blocks extends React.Component {
 
     const finish = (fm) => {
       this.props.save(fm)
-      console.log("RESET FORM")
+      // console.log("RESET FORM")
       this.fields = {}
       this.props.close()
     }

@@ -11,9 +11,9 @@ class Userscript extends React.Component {
 
   log(...message) {
     const tag = `[Block ${this.props.block.id}]`
-    console.log.apply(
-      console, [tag].concat(message)
-    )
+    // console.log.apply(
+    //   console, [tag].concat(message)
+    // )
   }
 
   constructor(...args) {
