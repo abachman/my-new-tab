@@ -4,7 +4,7 @@
   "name":       "My New Tab",
   "short_name": "My New Tab",
   "description": "My New Tab is the simplest and safest custom new tab page replacement. No frills, no ads, your links and information belong to you.",
-  "version": "1.0.1",
+  "version": "1.1.0",
 
   "icons": {
     "128": "icon.png"
