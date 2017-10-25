@@ -1,6 +1,6 @@
 # My New Tab
 
-A simple, clean, custom Chrome new tab page. If you're using the extension from the Chrome app store, all settings are synced across all your devices.
+A simple, clean, custom Chrome new tab page. If you're using the extension from the Chrome app store, all settings [will eventually be] synced across all your devices. (Pull requests welcome!)
 
 This is me playing with `create-react-app`, React, Redux, yarn. The whole pile / stack.
 
