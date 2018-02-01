@@ -2,7 +2,9 @@ import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 
 const DefaultState = {
-  blocks: {},
+  blocks: { },
+  block_cache: {},
+  block_state: {},
 
   settings: {},
 
@@ -45,8 +47,40 @@ const blocks = handleActions({
     })
 
     return nextBlocks
-  }
+  },
 }, DefaultState.blocks)
+
+const block_cache = handleActions({
+  CACHE_USERSCRIPT_BLOCK(state, { payload }) {
+    const { id, html, at } = payload
+    if (!(id && at && html)) {
+      return state
+    }
+
+    return Object.assign({}, state, { [id]: { html, at }})
+  },
+
+  UPDATE_BLOCK(state, { payload }) {
+    // clear cache
+    return Object.assign({}, state, { [payload.id]: {} })
+  },
+
+  DESTROY_BLOCK(state, { payload }) {
+    // clear cache
+    return Object.assign({}, state, { [payload.id]: {} })
+  },
+}, DefaultState.block_cache)
+
+const block_state = handleActions({
+  CACHE_USERSCRIPT_BLOCK(state, { payload }) {
+    return Object.assign({}, state, { [payload.id]: payload.state })
+  },
+
+  DESTROY_BLOCK(state, { payload }) {
+    // clear cache
+    return Object.assign({}, state, { [payload.id]: {} })
+  },
+}, DefaultState.block_state)
 
 const layout = handleActions({
   TOGGLE_EDITING(state, { payload }) {
@@ -77,10 +111,6 @@ const forms = handleActions({
 }, DefaultState.forms)
 
 const weathers = handleActions({
-  // INITIALIZE_EVERYTHING(state, { payload }) {
-  //   return {}
-  // },
-
   WEATHER_LOADED(state, { payload }) {
     return Object.assign({}, state, {
       [ payload.id ]: {
@@ -97,6 +127,8 @@ const feeds = handleActions({ }, DefaultState.feeds)
 
 export default combineReducers({
   blocks,
+  block_cache,
+  block_state,
   layout,
   settings,
   weathers,

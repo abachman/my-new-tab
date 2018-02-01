@@ -54,9 +54,10 @@ Actions.getWeather = (block) => {
   return (dispatch, getState) => {
     const { weathers } = getState()
 
+    // keep weather results for 5 minutes
     const now = Date.now()
     const existing = weathers[block.id]
-    const WAIT = 1000 * 60
+    const WAIT = 1000 * 60 * 5
     const doLoad = !existing || (existing.loadedAt && (now - existing.loadedAt) > WAIT)
 
     if (doLoad) {
@@ -77,12 +78,20 @@ Actions.getWeather = (block) => {
           }
         })
       })
-    } else {
-      // console.log('skip weather load for', block.id)
-      // console.log('last update', ((now - existing.loadedAt) / 1000).toFixed(2), 's ago')
     }
   }
 }
 
+Actions.cacheUserscript = (block, html, state) => {
+  return {
+    type: "CACHE_USERSCRIPT_BLOCK",
+    payload: {
+      html: html,
+      state: state,
+      id: block.id,
+      at: new Date().getTime(),
+    }
+  }
+}
 
 export default Actions

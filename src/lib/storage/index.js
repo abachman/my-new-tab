@@ -27,14 +27,26 @@ export function hydrate(defaultState, cb) {
       const g_diff = difference(given, defaults)
 
       if (g_diff.length > 0) {
+        console.log("IGNORE", g_diff, "STALE STORAGE ENTRIES")
+
+
         // storage contains things we no longer care about, feel free to clean up
         g_diff.forEach(stale => {
+          console.log("> DELETE", stale)
           delete state[stale]
         })
         cb(state)
       } else if (d_diff.length > 0) {
         // set defaults and go
-        cb(Object.assign({}, state, defaultState))
+        let newDefaults = {}
+
+        d_diff.forEach(nd => {
+          newDefaults[nd] = defaultState[nd]
+        })
+
+        console.log("ADD NEW DEFAULTS", newDefaults)
+
+        cb(Object.assign({}, state, newDefaults))
       } else {
         // state is safe, go for it
         cb(state)

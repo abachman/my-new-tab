@@ -7,6 +7,22 @@ export default class Userscript extends React.Component {
     refCb: PropTypes.func.isRequired
   }
 
+  cacheOptions() {
+    return [
+      ['No Caching', 0],
+      ['1 minute',   60 * 1000],
+      ['5 minutes',   60 * 1000 * 5],
+      ['30 minutes',  60 * 1000 * 30],
+      ['1 hour',   60 * 1000 * 60],
+      ['6 hours',   60 * 1000 * 60 * 6],
+      ['24 hours',  60 * 1000 * 60 * 24],
+    ].map(choice => {
+      const l = choice[0],
+            v = choice[1]
+      return <option value={v.toString()} key={l}>{l}</option>
+    })
+  }
+
   render() {
     const { refCb, form } = this.props
     const ref = refCb
@@ -29,6 +45,16 @@ export default class Userscript extends React.Component {
           <span className="help-block">
             Check out <a href='https://github.com/oneuijs/You-Dont-Need-jQuery'>You Don't Need jQuery</a> for
             help writing vanilla javascript and check out some <a href='https://gist.github.com/abachman/bd5b5acfd6b51352c0e42b742e039644'>sample userscripts on GitHub.</a>
+          </span>
+        </div>
+
+        <div className="form-group">
+          <label className="control-label" htmlFor="cache_timeout">Cache Results:</label>
+          <select ref={ref} className='form-control' name='cache_timeout' defaultValue={form.cache_timeout}>
+            {this.cacheOptions()}
+          </select>
+          <span className="help-block">
+            Doing expensive / slow API calls? Cache the resulting HTML and avoid GETs on every new tab load.
           </span>
         </div>
       </form>

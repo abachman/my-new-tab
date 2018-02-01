@@ -69,7 +69,7 @@ class Weather extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    weather: state.weathers[ownProps.block.id]
+    weather: state.weathers[ownProps.block.id],
   }
 }
 
@@ -77,7 +77,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetch: () => {
       dispatch(Actions.getWeather(ownProps.block))
-    }
+    },
   }
 }
 

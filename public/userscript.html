@@ -1,36 +1,40 @@
 <!doctype html>
+<!--
+  userscript.html is a page that is executed in the context of an iframe, which
+  _should_ protect the rest of the new tab page from malicious or misbehaving
+  user provided code.
+-->
 <html>
   <head>
-  </head>
-  <body>
     <script>
       // Set up message event handler:
-      // console.log('sandbox setting up')
       window.addEventListener('message', function(event) {
-        // console.log('sandbox got window message', event)
 
-        var sender = event.data.sender;
-        var domId = event.data.domId;
-        var code = event.data.code;
+        var sender = event.data.sender
+        var domId = event.data.domId
+        var code = event.data.code
         var size = event.data.size
+        var state = event.data.state
         var userfunc = null
 
         try {
           userfunc = eval("var ufunc = " + code + "; ufunc");
-          // console.log("found userfunc", userfunc)
         } catch(ex) {
           console.error("eval error", ex)
           userfunc = function (cb) { cb("failed to execute code: " + ex.message) }
         }
 
-        userfunc(function (html) {
+        userfunc(function (html, outState) {
           event.source.postMessage({
             sender: sender,
-            html: html
+            html: html,
+            state: outState
           }, event.origin);
-        }, domId, size)
+        }, domId, size, state)
       });
     </script>
+  </head>
+  <body>
   </body>
 </html>
 
