@@ -6,6 +6,8 @@ This is me playing with `create-react-app`, React, Redux, yarn. The whole pile /
 
 ![screenshot](https://github.com/abachman/my-new-tab/blob/master/assets/screenshot.png)
 
+[You can find it on the Chrome Webstore here.](https://chrome.google.com/webstore/detail/my-new-tab/gpneodfkmdkgoakeelnklgmcgohmdcpn)
+
 ## Developing
 
 Download and install dependencies:
