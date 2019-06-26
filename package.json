@@ -4,13 +4,14 @@
   "private": true,
   "dependencies": {
     "immutable": "^3.8.1",
+    "prop-types": "^15.7.2",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.5",
     "react-dom": "^15.3.2",
-    "react-grid-layout": "^0.13.9",
+    "react-grid-layout": "^0.16.3",
     "react-redux": "^4.4.5",
-    "react-scripts": "^0.7.0",
-    "react-sizeme": "^2.2.0",
+    "react-scripts": "^3.0.1",
+    "react-sizeme": "^2.6.7",
     "redux": "^3.6.0",
     "redux-actions": "^0.12.0",
     "redux-catch": "^1.2.0",
@@ -18,9 +19,24 @@
     "redux-thunk": "^2.1.0"
   },
   "scripts": {
-    "start": "NODE_PATH=./src PORT=4001 react-scripts start",
-    "build": "NODE_PATH=./src react-scripts build",
-    "test": "NODE_PATH=./src react-scripts test --env=jsdom",
+    "start": "PORT=4001 react-scripts start",
+    "build": "react-scripts build",
+    "test":  "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
