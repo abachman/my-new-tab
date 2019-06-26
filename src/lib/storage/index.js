@@ -4,7 +4,6 @@ const DB = new Database()
 
 export function persist(state, cb) {
   // simple persistence just plunks whole application state into storage
-  // console.log("PERSIST", state)
   DB.set({ '__my_new_tab': state }, cb)
 }
 
@@ -19,7 +18,6 @@ export function hydrate(defaultState, cb) {
     let state = existing['__my_new_tab']
 
     if (state && typeof state === 'object' && Object.keys(state).length > 0) {
-
       const defaults = Object.keys(defaultState)
       const given = Object.keys(state)
 
@@ -27,12 +25,8 @@ export function hydrate(defaultState, cb) {
       const g_diff = difference(given, defaults)
 
       if (g_diff.length > 0) {
-        console.log("IGNORE", g_diff, "STALE STORAGE ENTRIES")
-
-
         // storage contains things we no longer care about, feel free to clean up
         g_diff.forEach(stale => {
-          console.log("> DELETE", stale)
           delete state[stale]
         })
         cb(state)
@@ -44,22 +38,16 @@ export function hydrate(defaultState, cb) {
           newDefaults[nd] = defaultState[nd]
         })
 
-        console.log("ADD NEW DEFAULTS", newDefaults)
-
         cb(Object.assign({}, state, newDefaults))
       } else {
         // state is safe, go for it
         cb(state)
       }
-
     } else {
-
       // state is null or false, store default and use
       persist(defaultState, () => {
         cb(defaultState)
       })
-
     }
-
   })
 }

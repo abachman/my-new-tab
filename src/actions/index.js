@@ -14,6 +14,7 @@ const Actions = createActions({ },
   'DESTROY_BLOCK',
   'ADD_BLOCK',
   'TOGGLE_EDITING',
+  'TOGGLE_COMPACTING',
   'TOGGLE_BLOCK_EDITOR',
   'TOGGLE_SETTINGS_EDITOR',
 )
@@ -41,12 +42,33 @@ Actions.createBlock = (block) => {
   }
 }
 
+Actions.modifyBlockLayout = (block, options={}) => {
+  return {
+    type: 'MODIFY_BLOCK_LAYOUT',
+    payload: { block, options }
+  }
+}
+
 Actions.download = () => {
   return (dispatch, getState) => {
     dispatch({
       type: 'DOWNLOAD',
       payload: 'not yet'
     })
+  }
+}
+
+Actions.updateLayouts = (layouts) => {
+  return {
+    type: 'UPDATE_LAYOUTS',
+    payload: layouts
+  }
+}
+
+Actions.setBreakpoint = (breakpoint) => {
+  return {
+    type: 'SET_BREAKPOINT',
+    payload: breakpoint
   }
 }
 

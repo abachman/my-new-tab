@@ -11,7 +11,10 @@ const DefaultState = {
   layout: {
     coords: {},
     editing: false,
+    compacting: true,
   },
+
+  layouts: {},
 
   feeds: {},
   weathers: {},
@@ -83,12 +86,24 @@ const block_state = handleActions({
 }, DefaultState.block_state)
 
 const layout = handleActions({
+  TOGGLE_COMPACTING(state, { payload }) {
+    return Object.assign({}, state, {
+      compacting: payload
+    })
+  },
   TOGGLE_EDITING(state, { payload }) {
     return Object.assign({}, state, {
       editing: payload
     })
   },
 }, DefaultState.layout)
+
+const layouts = handleActions({
+  UPDATE_LAYOUTS(state, { payload }) {
+    return Object.assign({}, state, payload)
+  },
+}, DefaultState.layouts)
+
 
 const settings = handleActions({
   UPDATE_SETTINGS(state, { payload }) {
@@ -130,6 +145,7 @@ export default combineReducers({
   block_cache,
   block_state,
   layout,
+  layouts,
   settings,
   weathers,
   bookmarks,

@@ -6,7 +6,7 @@ This is me playing with `create-react-app`, React, Redux, yarn. The whole pile /
 
 ![screenshot](https://github.com/abachman/my-new-tab/blob/master/assets/screenshot.png)
 
-[You can find it on the Chrome Webstore here.](https://chrome.google.com/webstore/detail/my-new-tab/gpneodfkmdkgoakeelnklgmcgohmdcpn)
+[You can find it on the Chrome Web Store here.](https://chrome.google.com/webstore/detail/my-new-tab/gpneodfkmdkgoakeelnklgmcgohmdcpn)
 
 ## Developing
 
@@ -29,6 +29,7 @@ Run make:
 
 This creates the `build/` directory and copies manifest.json into it. If you want to load the unpacked extension, point Chrome at `build/`.
 
+Use `make package` to build a .zip file suitable for uploading to the Chrome Web Store. You'll need to generate your own art, though, if you want to go through the whole Chrome extension publishing thing.
 
 ## TODO
 

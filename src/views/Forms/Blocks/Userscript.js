@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 // Block editing form wrapper
 export default class Userscript extends React.Component {

@@ -4,10 +4,11 @@ import reduxCatch from 'redux-catch';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger'
 
+import reducer, { DefaultState } from './reducers'
+import { persist, hydrate } from './lib/storage'
+
 const loggerMiddleware = createLogger({collapsed: () => true});
 const errorHandler = (error, getState) => { console.error(error) }
-
-import reducer, { DefaultState } from './reducers'
 
 // http://stackoverflow.com/questions/35305661/where-to-write-to-localstorage-in-a-redux-app
 //
@@ -25,8 +26,6 @@ import reducer, { DefaultState } from './reducers'
 // If you use combineReducers() you’ll notice that reducers that haven’t
 // received the state will “boot up” as normal using their default state
 // argument value. This can be pretty handy.
-
-import { persist, hydrate } from './lib/storage'
 
 export function initStore(cb) {
   hydrate(DefaultState, (initialState) => {

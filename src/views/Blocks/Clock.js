@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import { GridBlockWrapper }  from './Base'
 import formatDate from '../../lib/formatDate'

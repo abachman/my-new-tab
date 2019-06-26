@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Button from 'react-bootstrap/lib/Button'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
@@ -26,7 +27,7 @@ export var GridBlockWrapper = Subtype => {
     }
 
     editButtons() {
-      const { editing, edit, destroy, block } = this.props
+      const { editing, edit, destroy, freeze, block } = this.props
       if (!editing) return null;
 
       return (
@@ -34,6 +35,11 @@ export var GridBlockWrapper = Subtype => {
           <Tip label='Edit'>
             <Button bsSize="small" onClick={() => { edit(block) }} title="Edit">
               <Glyphicon glyph='pencil' />
+            </Button>
+          </Tip>
+          <Tip label='Freeze'>
+            <Button bsSize="small" bsStyle="info" onClick={() => { freeze(block) }} title="Edit" active={this.props.block.static}>
+              <Glyphicon glyph='pushpin' />
             </Button>
           </Tip>
           <Tip label='Remove'>
@@ -103,6 +109,10 @@ export var GridBlockWrapper = Subtype => {
 
     destroy(block) {
       return dispatch(Actions.destroyBlock(block))
+    },
+
+    freeze(block) {
+      return dispatch(Actions.modifyBlockLayout(block, { static: true }))
     }
   })
 

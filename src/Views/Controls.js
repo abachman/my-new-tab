@@ -28,9 +28,26 @@ const CreateMenu = ({ onCreate }) => {
 
 // The GRID
 class Controls extends React.Component {
+  toggleCompacting() {
+    const { compacting } = this.props
+    this.props.toggleCompacting(!compacting)
+  }
+
   toggleEditing() {
     const { editing } = this.props
     this.props.toggleEditing(!editing)
+  }
+
+  compactingButton() {
+    const { compacting, editing } = this.props
+
+    if (!editing) return null
+
+    return (
+      <Tip label='Toggle vertical compacting'>
+        <Button onClick={this.toggleCompacting.bind(this)} bsStyle={compacting ? 'info' : 'default'} title='Compact' active={compacting}><Glyphicon glyph='eject'/></Button>
+      </Tip>
+    )
   }
 
   render() {
@@ -45,6 +62,7 @@ class Controls extends React.Component {
             <Button onClick={this.toggleEditing.bind(this)} bsStyle='info' title='Edit' active={editing}><Glyphicon glyph='pencil'/></Button>
           </Tip>
 
+          { this.compactingButton() }
           {/*
           <Tip label='Edit settings'>
             <Button onClick={this.props.editSettings}       bsStyle='default' title='Settings'><Glyphicon glyph='wrench'/></Button>
@@ -63,7 +81,8 @@ class Controls extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  editing: state.layout.editing
+  editing: state.layout.editing,
+  compacting: state.layout.compacting
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -83,6 +102,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   toggleEditing(toState) {
     return dispatch(Actions.toggleEditing(toState))
   },
+
+  toggleCompacting(toState) {
+    return dispatch(Actions.toggleCompacting(toState))
+  },
+
 
   download() {
     return dispatch(Actions.download())
