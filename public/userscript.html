@@ -3,38 +3,12 @@
   userscript.html is a page that is executed in the context of an iframe, which
   _should_ protect the rest of the new tab page from malicious or misbehaving
   user provided code.
+
+  https://report-uri.com/home/hash inline script:
+  'sha256-sUDWpO4Ggd/GN91rpTyh9xt6DjocsjsnTkMsU11xndY='
 -->
 <html>
-  <head>
-    <script>
-      // Set up message event handler:
-      window.addEventListener('message', function(event) {
-
-        var sender = event.data.sender
-        var domId = event.data.domId
-        var code = event.data.code
-        var size = event.data.size
-        var state = event.data.state
-        var userfunc = null
-
-        try {
-          userfunc = eval("var ufunc = " + code + "; ufunc");
-        } catch(ex) {
-          console.error("eval error", ex)
-          userfunc = function (cb) { cb("failed to execute code: " + ex.message) }
-        }
-
-        userfunc(function (html, outState) {
-          event.source.postMessage({
-            sender: sender,
-            html: html,
-            state: outState
-          }, event.origin);
-        }, domId, size, state)
-      });
-    </script>
-  </head>
-  <body>
-  </body>
+  <head><script src="userscript_runner.js"></script></head>
+  <body></body>
 </html>
 
