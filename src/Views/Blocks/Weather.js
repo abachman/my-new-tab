@@ -54,8 +54,9 @@ class Weather extends React.Component {
             </div>
           </div>
 
-          <a href="https://www.yahoo.com/?ilc=401" target="_blank" rel="noopener noreferrer"
-            className='weather-logo'> <img src="https://poweredby.yahoo.com/purple.png" width="134" height="29" alt="powered by Yahoo"/> </a>
+          <a href="https://www.yahoo.com/?ilc=401" target="_blank" rel="noopener noreferrer" className='weather-logo'>
+            <img src="https://poweredby.yahoo.com/purple.png" width="134" height="29" alt="powered by Yahoo"/>
+          </a>
         </div>
       )
     } else {

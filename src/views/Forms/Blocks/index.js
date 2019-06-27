@@ -44,7 +44,6 @@ class Blocks extends React.Component {
 
     const finish = (fm) => {
       this.props.save(fm)
-      // console.log("RESET FORM")
       this.fields = {}
       this.props.close()
     }
