@@ -20,7 +20,7 @@ Run create-react-app in development mode:
 
 Make changes, be mind boggled!
 
-This process has been tested on macOS 10.14.5, npm 6.9.0, and node 10.14.1
+This process has been tested on macOS 10.14.5, npm 6.9.0, and node 10.14.1.
 
 ## Building the Browser Extension
 
