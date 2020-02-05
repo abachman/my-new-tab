@@ -18,35 +18,41 @@ const launch = function () {
   })
 }
 
-let continueChecking = true
-let checkTimeout = null
+launch()
 
-function starter(evt) {
-  console.log('got ready message with event data', evt.data)
-  if (evt.data.source === 'userscripts') {
-    continueChecking = false
-    clearTimeout(checkTimeout)
-    launch()
-    console.log("remove window listener")
-    window.removeEventListener('message', starter)
-  }
-}
-console.log("attach window listener")
-window.addEventListener('message', starter)
+// let continueChecking = true
+// let checkTimeout = null
+//
+// function starter(evt) {
+//   console.log('got ready message with event data', evt.data)
+//   if (evt.data.source === 'userscripts') {
+//     continueChecking = false
+//     clearTimeout(checkTimeout)
+//     launch()
+//     console.log("remove window listener")
+//     window.removeEventListener('message', starter)
+//   }
+// }
+// console.log("attach window listener")
+// window.addEventListener('message', starter)
 
-function checker() {
-  const iframe = document.getElementById('usFrame')
-  if (iframe && iframe.contentWindow) {
-    console.log("publish docheck message")
-    iframe.contentWindow.postMessage({ docheck: true })
-  }
-
-  if (continueChecking) {
-    checkTimeout = setTimeout(checker, 500)
-  }
-}
-
-checker()
+// function checker() {
+//   const iframe = document.getElementById('usFrame')
+//   if (iframe && iframe.contentWindow) {
+//     console.log("publish docheck message")
+//     try {
+//       iframe.contentWindow.postMessage({ docheck: true })
+//     } catch (ex) {
+//       console.error("failed to publish to iframe", ex)
+//     }
+//   }
+//
+//   if (continueChecking) {
+//     checkTimeout = setTimeout(checker, 500)
+//   }
+// }
+//
+// checker()
 
 // document.getElementById('usFrame').onload = launch
 
