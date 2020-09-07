@@ -7,7 +7,13 @@ Makefile
 *.zip
 credentials.sh
 
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# assets
+assets/Chrome App Icon Export.png
+assets/Chrome App Icon Export@2x.png
+assets/app-icon-128.png
+assets/app-icon.sketch/
+assets/screenshot-1280.png
+assets/screenshot-640.png
 
 # dependencies
 node_modules
