@@ -16,7 +16,6 @@ class Clock extends React.Component {
   }
 
   componentDidMount() {
-    // render image data URL into canvas
     this._tick = setInterval(() => {
       this.setState({time: new Date()})
     }, 2000)
