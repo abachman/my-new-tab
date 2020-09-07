@@ -18,7 +18,7 @@ const CreateMenu = ({ onCreate }) => {
         <MenuItem onClick={() => onCreate('link')}>Link</MenuItem>
         <MenuItem onClick={() => onCreate('weather')}>Weather</MenuItem>
         <MenuItem onClick={() => onCreate('clock')}>Clock</MenuItem>
-        <MenuItem onClick={() => onCreate('userscript')}>Userscript</MenuItem>
+        {/* <MenuItem onClick={() => onCreate('userscript')}>Userscript</MenuItem> */}
         {/* <MenuItem onClick={() => onCreate('bookmarks')}>Bookmarks</MenuItem> */}
         {/* <MenuItem onClick={() => onCreate('feed')}>News Feed</MenuItem> */}
       </Dropdown.Menu>

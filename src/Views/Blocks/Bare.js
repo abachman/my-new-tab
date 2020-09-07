@@ -15,4 +15,4 @@ class Bare extends React.Component {
   }
 }
 
-export default GridBlockWrapper(Clock)
+export default GridBlockWrapper(Bare)
