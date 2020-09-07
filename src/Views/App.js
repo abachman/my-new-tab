@@ -11,7 +11,7 @@ import '../stylesheets/App.css'
 class App extends Component {
   render() {
     return (
-      <div className="App container">
+      <div className="App container" data-testid="app-container">
         <BlocksGrid />
         <Controls />
         <Forms.Settings />

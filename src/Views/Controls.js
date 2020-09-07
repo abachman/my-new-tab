@@ -11,7 +11,7 @@ import Actions from '../actions'
 const CreateMenu = ({ onCreate }) => {
   return (
     <Dropdown id='add-block-menu'>
-      <Dropdown.Toggle bsStyle='success'>
+      <Dropdown.Toggle bsStyle='success'  data-testid="add-block">
         <Glyphicon glyph="plus" />
       </Dropdown.Toggle>
       <Dropdown.Menu className="super-colors">
