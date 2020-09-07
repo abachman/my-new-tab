@@ -15,7 +15,7 @@ const DragLayer = ({editing}) => {
   else          return <div key='drag' className='drag-layer'/>
 }
 
-export var GridBlockWrapper = Subtype => {
+export const GridBlockWrapper = Subtype => {
   class GBW extends React.Component {
     static propTypes = {
       block: PropTypes.object.isRequired
