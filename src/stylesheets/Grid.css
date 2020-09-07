@@ -41,3 +41,6 @@
   transition-property: none;
 }
 
+.react-grid-item.react-grid-placeholder {
+  background-color: #00ff00;
+}
