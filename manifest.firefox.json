@@ -4,7 +4,7 @@
   "name":       "My New Tab",
   "short_name": "My New Tab",
   "description": "My New Tab is a simple and safe customizeable new tab page replacement. No frills, no ads, your links and information belong to you.",
-  "version": "1.4.0",
+  "version": "1.4.2",
 
   "developer": {
     "name": "Adam Bachman",
