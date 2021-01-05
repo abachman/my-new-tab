@@ -8,7 +8,7 @@ import { uploadImage } from '../../../lib/images'
 import Link from './Link'
 import Weather from './Weather'
 import Clock from './Clock'
-import Userscript from './Userscript'
+import Template from './Template'
 
 import Actions from '../../../actions'
 
@@ -16,11 +16,11 @@ import Actions from '../../../actions'
 class Blocks extends React.Component {
   static propTypes = {
     editing: PropTypes.bool,
-    form: PropTypes.object
+    form: PropTypes.object,
   }
 
-  constructor(props) {
-    super(props)
+  constructor(...args) {
+    super(...args)
     this.fields = {}
   }
 
@@ -28,7 +28,7 @@ class Blocks extends React.Component {
     const form = {}
     let imageField = null
 
-    Object.entries(this.fields).forEach(kv => {
+    Object.entries(this.fields).forEach((kv) => {
       const f = kv[1]
 
       if (f.type === 'checkbox') {
@@ -53,15 +53,14 @@ class Blocks extends React.Component {
       uploadImage(imageField, function (dataUrl) {
         form[imageField.name] = dataUrl
         finish(form)
-      });
+      })
     } else {
       finish(form)
     }
   }
 
   register(input) {
-    if (input)
-      this.fields[input.name] = input
+    if (input) this.fields[input.name] = input
   }
 
   form() {
@@ -73,8 +72,8 @@ class Blocks extends React.Component {
         return <Weather refCb={this.register.bind(this)} form={form} />
       case 'link':
         return <Link refCb={this.register.bind(this)} form={form} />
-      case 'userscript':
-        return <Userscript refCb={this.register.bind(this)} form={form} />
+      case 'template':
+        return <Template refCb={this.register.bind(this)} form={form} />
       default:
         return <Link refCb={this.register.bind(this)} form={form} />
     }
@@ -95,37 +94,41 @@ class Blocks extends React.Component {
           <Modal.Title>{form.type.toUpperCase()}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <input ref={ref} value={form.id} type='hidden' name='id'/>
-          <input ref={ref} value={form.type} type='hidden' name='type'/>
+          <input ref={ref} value={form.id} type="hidden" name="id" />
+          <input ref={ref} value={form.type} type="hidden" name="type" />
 
-          { this.form() }
+          {this.form()}
 
-          <div ref='item_preview' className='row'></div>
+          <div ref="item_preview" className="row"></div>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.close}>Cancel</Button>
-          <Button onClick={this.save.bind(this)} bsStyle='primary'>Save</Button>
+          <Button onClick={this.save.bind(this)} bsStyle="primary">
+            Save
+          </Button>
         </Modal.Footer>
       </Modal>
     )
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     editing: state.forms.blocks.visible,
-    form:    state.forms.blocks.form
+    form: state.forms.blocks.form,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     close() {
-      dispatch(Actions.toggleBlockEditor({
-        // hide and clear
-        visible: false,
-        form: {}
-      }))
+      dispatch(
+        Actions.toggleBlockEditor({
+          // hide and clear
+          visible: false,
+          form: {},
+        })
+      )
     },
 
     save(block) {
@@ -135,7 +138,7 @@ const mapDispatchToProps = dispatch => {
         delete block['id']
         dispatch(Actions.createBlock(block))
       }
-    }
+    },
   }
 }
 

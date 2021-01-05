@@ -1,9 +1,10 @@
 {
   "name": "my-new-tab",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "private": true,
   "dependencies": {
     "immutable": "^3.8.2",
+    "liquidjs": "^9.19.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-bootstrap": "^0.33.1",

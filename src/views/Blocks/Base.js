@@ -10,41 +10,62 @@ import Actions from 'actions'
 import sized from 'components/sized'
 import Tip from 'components/Tip'
 
-const DragLayer = ({editing}) => {
+const DragLayer = ({ editing }) => {
   if (!editing) return null
-  else          return <div key='drag' className='drag-layer'/>
+  else return <div key="drag" className="drag-layer" />
 }
 
-export const GridBlockWrapper = Subtype => {
+export const GridBlockWrapper = (Subtype) => {
   class GBW extends React.Component {
     static propTypes = {
-      block: PropTypes.object.isRequired
+      block: PropTypes.object.isRequired,
     }
 
-    constructor(props) {
-      super(props)
-      this.state = { data: null };
+    constructor(...props) {
+      super(...props)
+      this.state = { data: null }
     }
 
     editButtons() {
       const { editing, edit, destroy, freeze, block } = this.props
-      if (!editing) return null;
+      if (!editing) return null
 
       return (
-        <ButtonGroup className='item-controls'>
-          <Tip label='Edit'>
-            <Button bsSize="small" onClick={() => { edit(block) }} title="Edit">
-              <Glyphicon glyph='pencil' />
+        <ButtonGroup className="item-controls">
+          <Tip label="Edit">
+            <Button
+              bsSize="small"
+              onClick={() => {
+                edit(block)
+              }}
+              title="Edit"
+            >
+              <Glyphicon glyph="pencil" />
             </Button>
           </Tip>
-          <Tip label='Freeze'>
-            <Button bsSize="small" bsStyle="info" onClick={() => { freeze(block) }} title="Edit" active={this.props.block.static}>
-              <Glyphicon glyph='pushpin' />
+          <Tip label="Freeze">
+            <Button
+              bsSize="small"
+              bsStyle="info"
+              onClick={() => {
+                freeze(block)
+              }}
+              title="Edit"
+              active={this.props.block.static}
+            >
+              <Glyphicon glyph="pushpin" />
             </Button>
           </Tip>
-          <Tip label='Remove'>
-            <Button bsSize="small" bsStyle='danger' onClick={() => { destroy(block) }} title="Remove">
-              <Glyphicon glyph='remove' />
+          <Tip label="Remove">
+            <Button
+              bsSize="small"
+              bsStyle="danger"
+              onClick={() => {
+                destroy(block)
+              }}
+              title="Remove"
+            >
+              <Glyphicon glyph="remove" />
             </Button>
           </Tip>
         </ButtonGroup>
@@ -52,7 +73,7 @@ export const GridBlockWrapper = Subtype => {
     }
 
     componentDidMount() {
-      this.setState({ data: 'Hello' });
+      this.setState({ data: 'Hello' })
     }
 
     style() {
@@ -75,20 +96,14 @@ export const GridBlockWrapper = Subtype => {
       return this.props.block.show_border === '1' ? 'bordered' : ''
     }
 
-    debugButton() {
-      if (process.env.NODE_ENV === 'development') {
-        // return <a className='dbg' onClick={() => console.log('DBG', {props: this.props, block: this.props.block})}>debug</a>
-      }
-      return null;
-    }
-
     render() {
-      const className = `item block-item ${this.bgClass()} ${this.borderClass()} ${this.props.block.type}`
+      const className = `item block-item ${this.bgClass()} ${this.borderClass()} ${
+        this.props.block.type
+      }`
       return (
         <div className={className} style={this.style()}>
           {this.editButtons()}
-          {this.debugButton()}
-          <DragLayer  {...this.props} />
+          <DragLayer {...this.props} />
           <Subtype {...this.props} styles={this.style()} />
         </div>
       )
@@ -96,15 +111,17 @@ export const GridBlockWrapper = Subtype => {
   }
 
   const mapStateToProps = (state) => ({
-    editing: state.layout.editing
+    editing: state.layout.editing,
   })
 
   const mapDispatchToProps = (dispatch, ownProps) => ({
     edit(block) {
-      return dispatch(Actions.toggleBlockEditor({
-        visible: true,
-        form: Object.assign({}, block)
-      }))
+      return dispatch(
+        Actions.toggleBlockEditor({
+          visible: true,
+          form: Object.assign({}, block),
+        })
+      )
     },
 
     destroy(block) {
@@ -113,9 +130,8 @@ export const GridBlockWrapper = Subtype => {
 
     freeze(block) {
       return dispatch(Actions.modifyBlockLayout(block, { static: true }))
-    }
+    },
   })
 
   return connect(mapStateToProps, mapDispatchToProps)(sized(GBW))
 }
-

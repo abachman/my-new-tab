@@ -1,7 +1,7 @@
 import React from 'react'
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
-import {render as rtlRender} from '@testing-library/react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { render as rtlRender } from '@testing-library/react'
 import reducer, { DefaultState } from 'reducers'
 
 export const render = (
@@ -13,7 +13,7 @@ export const render = (
   } = {}
 ) => {
   function Wrapper({ children }) {
-    return <Provider store={store}>{children}</Provider>;
+    return <Provider store={store}>{children}</Provider>
   }
-  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
-};
+  return rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
+}

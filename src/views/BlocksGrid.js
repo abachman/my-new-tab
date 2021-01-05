@@ -9,7 +9,7 @@ import Link from './Blocks/Link'
 import Weather from './Blocks/Weather'
 import Clock from './Blocks/Clock'
 import Bookmarks from './Blocks/Bookmarks'
-// import Userscript from './Blocks/Userscript'
+import Template from './Blocks/Template'
 import Bare from './Blocks/Bare'
 import log from '../utils/logger'
 
@@ -36,7 +36,7 @@ for (let i = 1; i < 16; i += 2) {
 
 class BlocksGrid extends React.Component {
   static propTypes = {
-    blocks: PropTypes.object.isRequired
+    blocks: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -45,7 +45,7 @@ class BlocksGrid extends React.Component {
     this.state = {
       layout: {},
       breakpoint: null,
-      ready: false
+      ready: false,
     }
 
     this.onLayoutChange = this.onLayoutChange.bind(this)
@@ -61,13 +61,15 @@ class BlocksGrid extends React.Component {
   updateBlockItem(item) {
     const id = item.i
 
-    this.props.dispatch(Actions.updateBlock(id, {
-      coords: { ...item }
-    }))
+    this.props.dispatch(
+      Actions.updateBlock(id, {
+        coords: { ...item },
+      })
+    )
   }
 
   onLayoutChange(layout, layouts) {
-    log("onLayoutChange", layout, layouts)
+    log('onLayoutChange', layout, layouts)
     this.props.dispatch(Actions.updateLayouts(layouts))
   }
 
@@ -81,23 +83,26 @@ class BlocksGrid extends React.Component {
     switch (block.type) {
       case 'clock':
         blockView = <Clock block={block} />
-        break;
+        break
       case 'weather':
         blockView = <Weather block={block} />
-        break;
+        break
       case 'bookmarks':
         blockView = <Bookmarks block={block} />
-        break;
+        break
       case 'feed':
       case 'link':
         blockView = <Link block={block} />
-        break;
+        break
       case 'userscript':
         blockView = <Bare block={block} />
-        break;
+        break
+      case 'template':
+        blockView = <Template block={block} />
+        break
       default:
         blockView = <Link block={block} />
-        break;
+        break
     }
     return blockView
   }
@@ -105,12 +110,8 @@ class BlocksGrid extends React.Component {
   renderBlocks() {
     return Object.entries(this.props.blocks).map((kv, idx) => {
       const id = kv[0],
-            block = kv[1];
-      return (
-        <div key={id}>
-          { this.selectView(block) }
-        </div>
-      )
+        block = kv[1]
+      return <div key={id}>{this.selectView(block)}</div>
     })
   }
 
@@ -121,36 +122,31 @@ class BlocksGrid extends React.Component {
     return (
       <ResponsiveReactGridLayout
         className={className}
-
         autoSize={true}
         measureBeforeMount={true}
         isDraggable={editing}
         isResizable={editing}
-
-        breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
-        cols={{lg: 12, md: 10, sm: 6, xs: 4, xxs: 2}}
-
+        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         layouts={this.props.layouts}
-        containerPadding={[0,0]}
-
+        containerPadding={[0, 0]}
         onLayoutChange={this.onLayoutChange}
         onBreakpointChange={this.onBreakpointChange}
-
-        compactType={this.props.compacting ? "vertical" : null}
-        rowHeight={80}>
-
+        compactType={this.props.compacting ? 'vertical' : null}
+        rowHeight={80}
+      >
         {this.renderBlocks()}
       </ResponsiveReactGridLayout>
     )
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     blocks: state.blocks,
     layouts: state.layouts,
     editing: state.layout.editing,
-    compacting: state.layout.compacting
+    compacting: state.layout.compacting,
   }
 }
 

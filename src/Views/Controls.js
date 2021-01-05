@@ -10,20 +10,20 @@ import Actions from '../actions'
 
 const CreateMenu = ({ onCreate }) => {
   return (
-    <Dropdown id='add-block-menu'>
-      <Dropdown.Toggle bsStyle='success'  data-testid="add-block">
+    <Dropdown id="add-block-menu">
+      <Dropdown.Toggle bsStyle="success" data-testid="add-block">
         <Glyphicon glyph="plus" />
       </Dropdown.Toggle>
       <Dropdown.Menu className="super-colors">
         <MenuItem onClick={() => onCreate('link')}>Link</MenuItem>
         <MenuItem onClick={() => onCreate('weather')}>Weather</MenuItem>
         <MenuItem onClick={() => onCreate('clock')}>Clock</MenuItem>
-        {/* <MenuItem onClick={() => onCreate('userscript')}>Userscript</MenuItem> */}
+        <MenuItem onClick={() => onCreate('template')}>Template</MenuItem>
         {/* <MenuItem onClick={() => onCreate('bookmarks')}>Bookmarks</MenuItem> */}
         {/* <MenuItem onClick={() => onCreate('feed')}>News Feed</MenuItem> */}
       </Dropdown.Menu>
     </Dropdown>
-  );
+  )
 }
 
 // The GRID
@@ -44,8 +44,15 @@ class Controls extends React.Component {
     if (!editing) return null
 
     return (
-      <Tip label='Toggle vertical compacting'>
-        <Button onClick={this.toggleCompacting.bind(this)} bsStyle={compacting ? 'info' : 'default'} title='Compact' active={compacting}><Glyphicon glyph='eject'/></Button>
+      <Tip label="Toggle vertical compacting">
+        <Button
+          onClick={this.toggleCompacting.bind(this)}
+          bsStyle={compacting ? 'info' : 'default'}
+          title="Compact"
+          active={compacting}
+        >
+          <Glyphicon glyph="eject" />
+        </Button>
       </Tip>
     )
   }
@@ -54,15 +61,22 @@ class Controls extends React.Component {
     const { editing } = this.props
 
     return (
-      <div className='row controls'>
-        <div className='col-md-12'>
-          <CreateMenu onCreate={type => this.props.add(type)} />
+      <div className="row controls">
+        <div className="col-md-12">
+          <CreateMenu onCreate={(type) => this.props.add(type)} />
 
-          <Tip label='Toggle editing mode'>
-            <Button onClick={this.toggleEditing.bind(this)} bsStyle='info' title='Edit' active={editing}><Glyphicon glyph='pencil'/></Button>
+          <Tip label="Toggle editing mode">
+            <Button
+              onClick={this.toggleEditing.bind(this)}
+              bsStyle="info"
+              title="Edit"
+              active={editing}
+            >
+              <Glyphicon glyph="pencil" />
+            </Button>
           </Tip>
 
-          { this.compactingButton() }
+          {this.compactingButton()}
           {/*
           <Tip label='Edit settings'>
             <Button onClick={this.props.editSettings}       bsStyle='default' title='Settings'><Glyphicon glyph='wrench'/></Button>
@@ -70,8 +84,14 @@ class Controls extends React.Component {
           */}
 
           {/*
-          <Tip label='Download layout'>
-            <Button onClick={this.props.download}           bsStyle='default' title='Download'><Glyphicon glyph='download-alt'/></Button>
+          <Tip label="Download layout">
+            <Button
+              onClick={this.props.download}
+              bsStyle="default"
+              title="Download"
+            >
+              <Glyphicon glyph="download-alt" />
+            </Button>
           </Tip>
           */}
         </div>
@@ -82,21 +102,25 @@ class Controls extends React.Component {
 
 const mapStateToProps = (state) => ({
   editing: state.layout.editing,
-  compacting: state.layout.compacting
+  compacting: state.layout.compacting,
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   add(type) {
-    return dispatch(Actions.toggleBlockEditor({
-      visible: true,
-      form: { type }
-    }))
+    return dispatch(
+      Actions.toggleBlockEditor({
+        visible: true,
+        form: { type },
+      })
+    )
   },
 
   editSettings() {
-    return dispatch(Actions.toggleSettingsEditor({
-      visible: true
-    }))
+    return dispatch(
+      Actions.toggleSettingsEditor({
+        visible: true,
+      })
+    )
   },
 
   toggleEditing(toState) {
@@ -107,11 +131,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     return dispatch(Actions.toggleCompacting(toState))
   },
 
-
   download() {
     return dispatch(Actions.download())
   },
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Controls)
