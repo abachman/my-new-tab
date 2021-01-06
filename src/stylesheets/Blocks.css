@@ -55,11 +55,11 @@
   overflow: hidden;
 }
 
-/* .item .link-link {
+.item .link-link {
   display: block;
   width: 100%;
   height: 100%;
-} */
+}
 
 .item .template-content {
   display: block;

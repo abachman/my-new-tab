@@ -1,6 +1,6 @@
 {
   "name": "my-new-tab",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "private": true,
   "dependencies": {
     "immutable": "^3.8.2",
