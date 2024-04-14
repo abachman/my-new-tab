@@ -4,7 +4,7 @@ A simple, clean, custom Chrome new tab page. If you're using the extension from 
 
 This is me playing with `create-react-app`, React, Redux, npm. The whole pile / stack.
 
-![screenshot](https://github.com/abachman/my-new-tab/blob/master/assets/screenshot.png)
+![screenshot](https://github.com/abachman/my-new-tab/blob/main/assets/screenshot.png)
 
 [You can find it on the Chrome Web Store here.](https://chrome.google.com/webstore/detail/my-new-tab/gpneodfkmdkgoakeelnklgmcgohmdcpn)
 
