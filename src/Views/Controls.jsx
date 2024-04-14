@@ -1,12 +1,12 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import Glyphicon from 'react-bootstrap/lib/Glyphicon'
-import MenuItem from 'react-bootstrap/lib/MenuItem'
-import Dropdown from 'react-bootstrap/lib/Dropdown'
-import Button from 'react-bootstrap/lib/Button'
+import React from "react"
+import { connect } from "react-redux"
+import Glyphicon from "react-bootstrap/lib/Glyphicon"
+import MenuItem from "react-bootstrap/lib/MenuItem"
+import Dropdown from "react-bootstrap/lib/Dropdown"
+import Button from "react-bootstrap/lib/Button"
 
-import Tip from '../components/Tip'
-import Actions from '../actions'
+import Tip from "../components/Tip"
+import Actions from "../actions"
 
 const CreateMenu = ({ onCreate }) => {
   return (
@@ -15,10 +15,10 @@ const CreateMenu = ({ onCreate }) => {
         <Glyphicon glyph="plus" />
       </Dropdown.Toggle>
       <Dropdown.Menu className="super-colors">
-        <MenuItem onClick={() => onCreate('link')}>Link</MenuItem>
-        <MenuItem onClick={() => onCreate('weather')}>Weather</MenuItem>
-        <MenuItem onClick={() => onCreate('clock')}>Clock</MenuItem>
-        <MenuItem onClick={() => onCreate('template')}>Template</MenuItem>
+        <MenuItem onClick={() => onCreate("link")}>Link</MenuItem>
+        <MenuItem onClick={() => onCreate("weather")}>Weather</MenuItem>
+        <MenuItem onClick={() => onCreate("clock")}>Clock</MenuItem>
+        <MenuItem onClick={() => onCreate("template")}>Template</MenuItem>
         {/* <MenuItem onClick={() => onCreate('bookmarks')}>Bookmarks</MenuItem> */}
         {/* <MenuItem onClick={() => onCreate('feed')}>News Feed</MenuItem> */}
       </Dropdown.Menu>
@@ -47,7 +47,7 @@ class Controls extends React.Component {
       <Tip label="Toggle vertical compacting">
         <Button
           onClick={this.toggleCompacting.bind(this)}
-          bsStyle={compacting ? 'info' : 'default'}
+          bsStyle={compacting ? "info" : "default"}
           title="Compact"
           active={compacting}
         >

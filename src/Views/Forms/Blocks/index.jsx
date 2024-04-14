@@ -1,16 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import Modal from 'react-bootstrap/lib/Modal'
-import Button from 'react-bootstrap/lib/Button'
+import React from "react"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import Modal from "react-bootstrap/lib/Modal"
+import Button from "react-bootstrap/lib/Button"
 
-import { uploadImage } from '../../../lib/images'
-import Link from './Link'
-import Weather from './Weather'
-import Clock from './Clock'
-import Template from './Template'
+import { uploadImage } from "../../../lib/images"
+import Link from "./Link"
+import Weather from "./Weather"
+import Clock from "./Clock"
+import Template from "./Template"
 
-import Actions from '../../../actions'
+import Actions from "../../../actions"
 
 // Block editing form wrapper
 class Blocks extends React.Component {
@@ -31,9 +31,9 @@ class Blocks extends React.Component {
     Object.entries(this.fields).forEach((kv) => {
       const f = kv[1]
 
-      if (f.type === 'checkbox') {
-        form[f.name] = f.checked ? '1' : '0'
-      } else if (f.type === 'file') {
+      if (f.type === "checkbox") {
+        form[f.name] = f.checked ? "1" : "0"
+      } else if (f.type === "file") {
         if (f.files && f.files[0]) {
           imageField = f
         }
@@ -66,13 +66,13 @@ class Blocks extends React.Component {
   form() {
     const { form } = this.props
     switch (form.type) {
-      case 'clock':
+      case "clock":
         return <Clock refCb={this.register.bind(this)} form={form} />
-      case 'weather':
+      case "weather":
         return <Weather refCb={this.register.bind(this)} form={form} />
-      case 'link':
+      case "link":
         return <Link refCb={this.register.bind(this)} form={form} />
-      case 'template':
+      case "template":
         return <Template refCb={this.register.bind(this)} form={form} />
       default:
         return <Link refCb={this.register.bind(this)} form={form} />
@@ -135,7 +135,7 @@ const mapDispatchToProps = (dispatch) => {
       if (block.id && block.id.length > 0) {
         dispatch(Actions.updateBlock(block.id, { ...block }))
       } else {
-        delete block['id']
+        delete block["id"]
         dispatch(Actions.createBlock(block))
       }
     },

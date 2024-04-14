@@ -1,14 +1,14 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import Button from 'react-bootstrap/lib/Button'
-import Glyphicon from 'react-bootstrap/lib/Glyphicon'
-import ButtonGroup from 'react-bootstrap/lib/ButtonGroup'
+import React from "react"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import Button from "react-bootstrap/lib/Button"
+import Glyphicon from "react-bootstrap/lib/Glyphicon"
+import ButtonGroup from "react-bootstrap/lib/ButtonGroup"
 
-import Color from 'lib/Color'
-import Actions from 'actions'
-import sized from 'components/sized'
-import Tip from 'components/Tip'
+import Color from "lib/Color"
+import Actions from "actions"
+import sized from "components/sized"
+import Tip from "components/Tip"
 
 const DragLayer = ({ editing }) => {
   if (!editing) return null
@@ -73,7 +73,7 @@ export const GridBlockWrapper = (Subtype) => {
     }
 
     componentDidMount() {
-      this.setState({ data: 'Hello' })
+      this.setState({ data: "Hello" })
     }
 
     style() {
@@ -81,19 +81,19 @@ export const GridBlockWrapper = (Subtype) => {
 
       let background = background_color
 
-      if (transparent_background === '1' || !background) {
-        background = 'transparent'
+      if (transparent_background === "1" || !background) {
+        background = "transparent"
       }
 
       return { background }
     }
 
     bgClass() {
-      return Color.hexIsLight(this.style().background) ? 'bg-light' : 'bg-dark'
+      return Color.hexIsLight(this.style().background) ? "bg-light" : "bg-dark"
     }
 
     borderClass() {
-      return this.props.block.show_border === '1' ? 'bordered' : ''
+      return this.props.block.show_border === "1" ? "bordered" : ""
     }
 
     render() {
