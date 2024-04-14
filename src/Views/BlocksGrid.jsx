@@ -1,25 +1,25 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Responsive, WidthProvider } from 'react-grid-layout'
+import React from "react"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { Responsive, WidthProvider } from "react-grid-layout"
 
-import Actions from 'actions'
+import Actions from "actions"
 
-import Link from './Blocks/Link'
-import Weather from './Blocks/Weather'
-import Clock from './Blocks/Clock'
-import Bookmarks from './Blocks/Bookmarks'
-import Template from './Blocks/Template'
-import Bare from './Blocks/Bare'
-import log from '../utils/logger'
+import Link from "./Blocks/Link"
+import Weather from "./Blocks/Weather"
+import Clock from "./Blocks/Clock"
+import Bookmarks from "./Blocks/Bookmarks"
+import Template from "./Blocks/Template"
+import Bare from "./Blocks/Bare"
+import log from "../utils/logger"
 
 // lib
-import 'react-resizable/css/styles.css'
-import 'react-grid-layout/css/styles.css'
+import "react-resizable/css/styles.css"
+import "react-grid-layout/css/styles.css"
 
 // custom
-import 'stylesheets/Grid.css'
-import 'stylesheets/Blocks.css'
+import "stylesheets/Grid.css"
+import "stylesheets/Blocks.css"
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
@@ -29,7 +29,7 @@ const STEP = 80
 const COLS = {}
 const BREAKPOINTS = {}
 for (let i = 1; i < 16; i += 2) {
-  const lbl = 'col_' + i
+  const lbl = "col_" + i
   COLS[lbl] = i
   BREAKPOINTS[lbl] = i * STEP
 }
@@ -69,35 +69,35 @@ class BlocksGrid extends React.Component {
   }
 
   onLayoutChange(layout, layouts) {
-    log('onLayoutChange', layout, layouts)
+    log("onLayoutChange", layout, layouts)
     this.props.dispatch(Actions.updateLayouts(layouts))
   }
 
   onBreakpointChange(breakpoint) {
-    log('onBreakpointChange', breakpoint)
+    log("onBreakpointChange", breakpoint)
     this.props.dispatch(Actions.setBreakpoint(breakpoint))
   }
 
   selectView(block) {
     let blockView
     switch (block.type) {
-      case 'clock':
+      case "clock":
         blockView = <Clock block={block} />
         break
-      case 'weather':
+      case "weather":
         blockView = <Weather block={block} />
         break
-      case 'bookmarks':
+      case "bookmarks":
         blockView = <Bookmarks block={block} />
         break
-      case 'feed':
-      case 'link':
+      case "feed":
+      case "link":
         blockView = <Link block={block} />
         break
-      case 'userscript':
+      case "userscript":
         blockView = <Bare block={block} />
         break
-      case 'template':
+      case "template":
         blockView = <Template block={block} />
         break
       default:
@@ -117,7 +117,7 @@ class BlocksGrid extends React.Component {
 
   render() {
     const { editing } = this.props
-    const className = 'grid-layout ' + (this.state.ready ? 'ready' : 'unready')
+    const className = "grid-layout " + (this.state.ready ? "ready" : "unready")
 
     return (
       <ResponsiveReactGridLayout
@@ -132,7 +132,7 @@ class BlocksGrid extends React.Component {
         containerPadding={[0, 0]}
         onLayoutChange={this.onLayoutChange}
         onBreakpointChange={this.onBreakpointChange}
-        compactType={this.props.compacting ? 'vertical' : null}
+        compactType={this.props.compacting ? "vertical" : null}
         rowHeight={80}
       >
         {this.renderBlocks()}

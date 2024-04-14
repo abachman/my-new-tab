@@ -33,8 +33,10 @@
   font-weight: bold;
 }
 
-.item.weather .weather-date { }
-.item.weather .sunset { }
+.item.weather .weather-date {
+}
+.item.weather .sunset {
+}
 
 .item.weather .conditions {
   font-size: 24px;

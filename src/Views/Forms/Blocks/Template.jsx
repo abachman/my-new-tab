@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
 // Block editing form wrapper
 export default class Template extends React.Component {
@@ -10,13 +10,13 @@ export default class Template extends React.Component {
 
   cacheOptions() {
     return [
-      ['No Caching', 0],
-      ['1 minute', 60 * 1000],
-      ['5 minutes', 60 * 1000 * 5],
-      ['30 minutes', 60 * 1000 * 30],
-      ['1 hour', 60 * 1000 * 60],
-      ['6 hours', 60 * 1000 * 60 * 6],
-      ['24 hours', 60 * 1000 * 60 * 24],
+      ["No Caching", 0],
+      ["1 minute", 60 * 1000],
+      ["5 minutes", 60 * 1000 * 5],
+      ["30 minutes", 60 * 1000 * 30],
+      ["1 hour", 60 * 1000 * 60],
+      ["6 hours", 60 * 1000 * 60 * 6],
+      ["24 hours", 60 * 1000 * 60 * 24],
     ].map((choice) => {
       const l = choice[0],
         v = choice[1]
@@ -50,7 +50,7 @@ export default class Template extends React.Component {
             Template:
           </label>
           <textarea
-            style={{ fontFamily: 'monospace', height: '175px' }}
+            style={{ fontFamily: "monospace", height: "175px" }}
             ref={ref}
             className="form-control"
             name="template"
@@ -64,11 +64,11 @@ export default class Template extends React.Component {
             template as the <code>data</code> property.
           </p>
           <p className="help-block">
-            Check out{' '}
+            Check out{" "}
             <a href="https://shopify.github.io/liquid/">
               the Liquid template language guide
-            </a>{' '}
-            for help writing html templates. Check out{' '}
+            </a>{" "}
+            for help writing html templates. Check out{" "}
             <a href="https://gist.github.com/abachman/f8d0fe95200912d037cbc70a1c3beb5f">
               some sample URLs and templates on GitHub.
             </a>

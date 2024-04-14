@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Liquid } from 'liquidjs'
-import { connect } from 'react-redux'
+import React from "react"
+import PropTypes from "prop-types"
+import { Liquid } from "liquidjs"
+import { connect } from "react-redux"
 
-import { GridBlockWrapper } from './Base'
-import Actions from 'actions'
+import { GridBlockWrapper } from "./Base"
+import Actions from "actions"
 
 const engine = new Liquid()
 
@@ -18,7 +18,7 @@ class Template extends React.Component {
 
     this.state = {
       data: {},
-      html: '',
+      html: "",
     }
   }
 
@@ -29,7 +29,7 @@ class Template extends React.Component {
 
   componentDidMount() {
     if (this.useCache()) {
-      this.log('using cached html', this.props.cache.html)
+      this.log("using cached html", this.props.cache.html)
       this.setState({ html: this.props.cache.html })
       return
     }
@@ -39,11 +39,11 @@ class Template extends React.Component {
       : Promise.resolve({ json: () => Promise.resolve({}) })
     getData
       .then((data) => {
-        this.log('with URL', this.props.block.url)
+        this.log("with URL", this.props.block.url)
         return data.json()
       })
       .then((json) => {
-        if (JSON.stringify(json)[0] !== '{') {
+        if (JSON.stringify(json)[0] !== "{") {
           json = { data: json }
         }
 

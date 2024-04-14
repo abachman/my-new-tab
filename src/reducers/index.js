@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
-import { handleActions } from 'redux-actions'
+import { combineReducers } from "redux"
+import { handleActions } from "redux-actions"
 
 const DefaultState = {
-  blocks: { },
+  blocks: {},
   block_cache: {},
   block_state: {},
 
@@ -23,122 +23,145 @@ const DefaultState = {
   forms: {
     blocks: { visible: false, form: {} },
     settings: { visible: false, form: {} },
-  }
+  },
 }
 
-const blocks = handleActions({
-  CREATE_BLOCK(state, { payload }) {
-    return Object.assign({}, state, {
-      [payload.id]: payload
-    })
+const blocks = handleActions(
+  {
+    CREATE_BLOCK(state, { payload }) {
+      return Object.assign({}, state, {
+        [payload.id]: payload,
+      })
+    },
+
+    UPDATE_BLOCK(state, { payload }) {
+      return Object.assign({}, state, {
+        [payload.id]: payload,
+      })
+    },
+
+    DESTROY_BLOCK(state, { payload }) {
+      const nextBlocks = {}
+
+      Object.entries(state).forEach((kv) => {
+        // leave out the deleted block
+        if (kv[0] !== payload.id) {
+          nextBlocks[kv[0]] = kv[1]
+        }
+      })
+
+      return nextBlocks
+    },
   },
+  DefaultState.blocks
+)
 
-  UPDATE_BLOCK(state, { payload }) {
-    return Object.assign({}, state, {
-      [payload.id]: payload
-    })
-  },
-
-  DESTROY_BLOCK(state, { payload }) {
-    const nextBlocks = {}
-
-    Object.entries(state).forEach((kv) => {
-      // leave out the deleted block
-      if (kv[0] !== payload.id) {
-        nextBlocks[kv[0]] = kv[1]
+const block_cache = handleActions(
+  {
+    CACHE_USERSCRIPT_BLOCK(state, { payload }) {
+      const { id, html, at } = payload
+      if (!(id && at && html)) {
+        return state
       }
-    })
 
-    return nextBlocks
+      return Object.assign({}, state, { [id]: { html, at } })
+    },
+
+    UPDATE_BLOCK(state, { payload }) {
+      // clear cache
+      return Object.assign({}, state, { [payload.id]: {} })
+    },
+
+    DESTROY_BLOCK(state, { payload }) {
+      // clear cache
+      return Object.assign({}, state, { [payload.id]: {} })
+    },
   },
-}, DefaultState.blocks)
+  DefaultState.block_cache
+)
 
-const block_cache = handleActions({
-  CACHE_USERSCRIPT_BLOCK(state, { payload }) {
-    const { id, html, at } = payload
-    if (!(id && at && html)) {
-      return state
-    }
+const block_state = handleActions(
+  {
+    CACHE_USERSCRIPT_BLOCK(state, { payload }) {
+      return Object.assign({}, state, { [payload.id]: payload.state })
+    },
 
-    return Object.assign({}, state, { [id]: { html, at }})
+    DESTROY_BLOCK(state, { payload }) {
+      // clear cache
+      return Object.assign({}, state, { [payload.id]: {} })
+    },
   },
+  DefaultState.block_state
+)
 
-  UPDATE_BLOCK(state, { payload }) {
-    // clear cache
-    return Object.assign({}, state, { [payload.id]: {} })
+const layout = handleActions(
+  {
+    TOGGLE_COMPACTING(state, { payload }) {
+      return Object.assign({}, state, {
+        compacting: payload,
+      })
+    },
+    TOGGLE_EDITING(state, { payload }) {
+      return Object.assign({}, state, {
+        editing: payload,
+      })
+    },
   },
+  DefaultState.layout
+)
 
-  DESTROY_BLOCK(state, { payload }) {
-    // clear cache
-    return Object.assign({}, state, { [payload.id]: {} })
+const layouts = handleActions(
+  {
+    UPDATE_LAYOUTS(state, { payload }) {
+      return Object.assign({}, state, payload)
+    },
   },
-}, DefaultState.block_cache)
+  DefaultState.layouts
+)
 
-const block_state = handleActions({
-  CACHE_USERSCRIPT_BLOCK(state, { payload }) {
-    return Object.assign({}, state, { [payload.id]: payload.state })
+const settings = handleActions(
+  {
+    UPDATE_SETTINGS(state, { payload }) {
+      return payload
+    },
   },
+  DefaultState.settings
+)
 
-  DESTROY_BLOCK(state, { payload }) {
-    // clear cache
-    return Object.assign({}, state, { [payload.id]: {} })
+const forms = handleActions(
+  {
+    TOGGLE_BLOCK_EDITOR(state, { payload }) {
+      return Object.assign({}, state, {
+        blocks: Object.assign({}, state.blocks, payload),
+      })
+    },
+
+    TOGGLE_SETTINGS_EDITOR(state, { payload }) {
+      return Object.assign({}, state, {
+        settings: Object.assign({}, state.settings, payload),
+      })
+    },
   },
-}, DefaultState.block_state)
+  DefaultState.forms
+)
 
-const layout = handleActions({
-  TOGGLE_COMPACTING(state, { payload }) {
-    return Object.assign({}, state, {
-      compacting: payload
-    })
+const weathers = handleActions(
+  {
+    WEATHER_LOADED(state, { payload }) {
+      return Object.assign({}, state, {
+        [payload.id]: {
+          loadedAt: Date.now(),
+          ...payload.content,
+        },
+      })
+    },
   },
-  TOGGLE_EDITING(state, { payload }) {
-    return Object.assign({}, state, {
-      editing: payload
-    })
-  },
-}, DefaultState.layout)
+  DefaultState.weathers
+)
 
-const layouts = handleActions({
-  UPDATE_LAYOUTS(state, { payload }) {
-    return Object.assign({}, state, payload)
-  },
-}, DefaultState.layouts)
+const bookmarks = handleActions({}, DefaultState.bookmarks)
 
-
-const settings = handleActions({
-  UPDATE_SETTINGS(state, { payload }) {
-    return payload
-  }
-}, DefaultState.settings)
-
-const forms = handleActions({
-  TOGGLE_BLOCK_EDITOR(state, { payload }) {
-    return Object.assign({}, state, {
-      blocks: Object.assign({}, state.blocks, payload)
-    })
-  },
-
-  TOGGLE_SETTINGS_EDITOR(state, { payload }) {
-    return Object.assign({}, state, {
-      settings: Object.assign({}, state.settings, payload)
-    })
-  }
-}, DefaultState.forms)
-
-const weathers = handleActions({
-  WEATHER_LOADED(state, { payload }) {
-    return Object.assign({}, state, {
-      [ payload.id ]: {
-        loadedAt: Date.now(),
-        ...payload.content
-      }
-    })
-  },
-}, DefaultState.weathers)
-
-const bookmarks = handleActions({ }, DefaultState.bookmarks)
-
-const feeds = handleActions({ }, DefaultState.feeds)
+const feeds = handleActions({}, DefaultState.feeds)
 
 export default combineReducers({
   blocks,
@@ -150,9 +173,7 @@ export default combineReducers({
   weathers,
   bookmarks,
   feeds,
-  forms
+  forms,
 })
 
 export { DefaultState }
-
-

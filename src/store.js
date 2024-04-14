@@ -1,14 +1,16 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from "redux"
 
-import reduxCatch from 'redux-catch';
-import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger'
+import reduxCatch from "redux-catch"
+import thunkMiddleware from "redux-thunk"
+import { createLogger } from "redux-logger"
 
-import reducer, { DefaultState } from './reducers'
-import { persist, hydrate } from './lib/storage'
+import reducer, { DefaultState } from "./reducers"
+import { persist, hydrate } from "./lib/storage"
 
-const loggerMiddleware = createLogger({collapsed: () => true});
-const errorHandler = (error, getState) => { console.error(error) }
+const loggerMiddleware = createLogger({ collapsed: () => true })
+const errorHandler = (error, getState) => {
+  console.error(error)
+}
 
 // http://stackoverflow.com/questions/35305661/where-to-write-to-localstorage-in-a-redux-app
 //
@@ -43,7 +45,7 @@ export function initStore(cb) {
       persist(store.getState())
     })
 
-    store.dispatch({type: 'INITIALIZE_EVERYTHING'})
+    store.dispatch({ type: "INITIALIZE_EVERYTHING" })
 
     cb(store)
   })
