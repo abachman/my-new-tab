@@ -1,10 +1,10 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "My New Tab",
   "short_name": "My New Tab",
   "description": "My New Tab is the simplest and safest custom new tab page replacement. No frills, no ads, your links and information belong to you.",
-  "version": "1.5.1",
+  "version": "1.6.0",
 
   "author": "Adam Bachman",
   "homepage_url": "https://github.com/abachman/my-new-tab",
@@ -16,9 +16,6 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-
-  "web_accessible_resources": ["static/*"],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
 
   "incognito": "not_allowed",
   "permissions": ["storage"]
