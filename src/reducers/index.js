@@ -163,7 +163,7 @@ const bookmarks = handleActions({}, DefaultState.bookmarks)
 
 const feeds = handleActions({}, DefaultState.feeds)
 
-export default combineReducers({
+const combinedReducer = combineReducers({
   blocks,
   block_cache,
   block_state,
@@ -175,5 +175,15 @@ export default combineReducers({
   feeds,
   forms,
 })
+
+const rootReducer = (state, action) => {
+  if (action.type === "IMPORT_DATA") {
+    // Merge imported data with default state to ensure all keys exist
+    return { ...DefaultState, ...action.payload }
+  }
+  return combinedReducer(state, action)
+}
+
+export default rootReducer
 
 export { DefaultState }
