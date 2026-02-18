@@ -25,7 +25,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "build:chrome": "vite build --outDir=dist --emptyOutDir && cp manifest.chrome.json dist/manifest.json && cp assets/icon.png dist/icon.png",
+    "build:chrome": "vite build --outDir=dist --emptyOutDir && cp manifest.chrome.json dist/manifest.json && cp assets/app-icon-128.png dist/icon.png",
     "preview": "vite preview"
   },
   "devDependencies": {
