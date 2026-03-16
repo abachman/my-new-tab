@@ -23,6 +23,7 @@ const Template = ({ refCb, form }) => (
       </label>
       <input
         name="url"
+        id="url"
         ref={refCb}
         type="text"
         placeholder="https://api.json"
@@ -37,6 +38,7 @@ const Template = ({ refCb, form }) => (
         ref={refCb}
         className="form-control"
         name="template"
+        id="template"
         defaultValue={form.template}
       />
       <p className="form-text text-muted">
@@ -66,6 +68,7 @@ const Template = ({ refCb, form }) => (
         ref={refCb}
         className="form-control"
         name="cache_timeout"
+        id="cache_timeout"
         defaultValue={form.cache_timeout || (60 * 1000 * 5).toString()}
       >
         {cacheOptions()}

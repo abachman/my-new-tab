@@ -19,6 +19,7 @@ const Link = ({ refCb, form }) => {
           defaultValue={form.label}
           className="form-control"
           name="label"
+          id="label"
         />
       </div>
       <div className="mb-3">
@@ -31,6 +32,7 @@ const Link = ({ refCb, form }) => {
           defaultValue={defaultColor}
           className="form-control"
           name="background_color"
+          id="background_color"
         />
       </div>
       <div className="form-check">
@@ -67,6 +69,7 @@ const Link = ({ refCb, form }) => {
           defaultValue={form.url}
           className="form-control"
           name="url"
+          id="url"
         />
       </div>
       <div className="mb-3">

@@ -12,6 +12,7 @@ const Weather = ({ refCb, form }) => (
         defaultValue={form.location}
         className="form-control"
         name="location"
+        id="location"
       />
     </div>
 
@@ -25,6 +26,7 @@ const Weather = ({ refCb, form }) => (
         defaultValue={form.background_color}
         className="form-control"
         name="background_color"
+        id="background_color"
       />
     </div>
   </form>

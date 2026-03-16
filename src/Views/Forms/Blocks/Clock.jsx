@@ -24,6 +24,7 @@ const Clock = ({ refCb, form }) => (
         ref={refCb}
         className="form-control"
         name="fontFamily"
+        id="fontFamily"
         defaultValue={form.fontFamily}
       >
         {fontFamilyOptions()}
@@ -40,6 +41,7 @@ const Clock = ({ refCb, form }) => (
         defaultValue={form.background_color}
         className="form-control"
         name="background_color"
+        id="background_color"
       />
     </div>
   </form>

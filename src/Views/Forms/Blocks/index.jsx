@@ -95,15 +95,29 @@ const Blocks = () => {
         <Modal.Title>{form.type.toUpperCase()}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <input ref={register} value={form.id} type="hidden" name="id" readOnly />
-        <input ref={register} value={form.type} type="hidden" name="type" readOnly />
+        <input
+          ref={register}
+          value={form.id}
+          type="hidden"
+          name="id"
+          readOnly
+        />
+        <input
+          ref={register}
+          value={form.type}
+          type="hidden"
+          name="type"
+          readOnly
+        />
 
         {renderForm()}
 
         <div ref={previewRef} className="row"></div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={close}>Cancel</Button>
+        <Button onClick={close} variant="secondary">
+          Cancel
+        </Button>
         <Button onClick={save} variant="primary">
           Save
         </Button>
