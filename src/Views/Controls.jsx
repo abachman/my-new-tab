@@ -1,5 +1,4 @@
-import React from "react"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import Glyphicon from "react-bootstrap/lib/Glyphicon"
 import MenuItem from "react-bootstrap/lib/MenuItem"
 import Dropdown from "react-bootstrap/lib/Dropdown"
@@ -26,27 +25,28 @@ const CreateMenu = ({ onCreate }) => {
   )
 }
 
-// The GRID
-class Controls extends React.Component {
-  toggleCompacting() {
-    const { compacting } = this.props
-    this.props.toggleCompacting(!compacting)
-  }
+const Controls = () => {
+  const dispatch = useDispatch()
+  const editing = useSelector((state) => state.layout.editing)
+  const compacting = useSelector((state) => state.layout.compacting)
 
-  toggleEditing() {
-    const { editing } = this.props
-    this.props.toggleEditing(!editing)
-  }
+  const add = (type) =>
+    dispatch(Actions.toggleBlockEditor({ visible: true, form: { type } }))
 
-  compactingButton() {
-    const { compacting, editing } = this.props
+  const editSettings = () =>
+    dispatch(Actions.toggleSettingsEditor({ visible: true }))
 
+  const toggleEditing = () => dispatch(Actions.toggleEditing(!editing))
+
+  const toggleCompacting = () => dispatch(Actions.toggleCompacting(!compacting))
+
+  const compactingButton = () => {
     if (!editing) return null
 
     return (
       <Tip label="Toggle vertical compacting">
         <Button
-          onClick={this.toggleCompacting.bind(this)}
+          onClick={toggleCompacting}
           bsStyle={compacting ? "info" : "default"}
           title="Compact"
           active={compacting}
@@ -57,88 +57,36 @@ class Controls extends React.Component {
     )
   }
 
-  render() {
-    const { editing } = this.props
+  return (
+    <div className="row controls">
+      <div className="col-md-12">
+        <CreateMenu onCreate={add} />
 
-    return (
-      <div className="row controls">
-        <div className="col-md-12">
-          <CreateMenu onCreate={(type) => this.props.add(type)} />
+        <Tip label="Toggle editing mode">
+          <Button
+            onClick={toggleEditing}
+            bsStyle="info"
+            title="Edit"
+            active={editing}
+          >
+            <Glyphicon glyph="pencil" />
+          </Button>
+        </Tip>
 
-          <Tip label="Toggle editing mode">
-            <Button
-              onClick={this.toggleEditing.bind(this)}
-              bsStyle="info"
-              title="Edit"
-              active={editing}
-            >
-              <Glyphicon glyph="pencil" />
-            </Button>
-          </Tip>
+        {compactingButton()}
 
-          {this.compactingButton()}
-
-          <Tip label="Edit settings">
-            <Button
-              onClick={this.props.editSettings}
-              bsStyle="default"
-              title="Settings"
-            >
-              <Glyphicon glyph="wrench" />
-            </Button>
-          </Tip>
-
-          {/*
-          <Tip label="Download layout">
-            <Button
-              onClick={this.props.download}
-              bsStyle="default"
-              title="Download"
-            >
-              <Glyphicon glyph="download-alt" />
-            </Button>
-          </Tip>
-          */}
-        </div>
+        <Tip label="Edit settings">
+          <Button
+            onClick={editSettings}
+            bsStyle="default"
+            title="Settings"
+          >
+            <Glyphicon glyph="wrench" />
+          </Button>
+        </Tip>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-const mapStateToProps = (state) => ({
-  editing: state.layout.editing,
-  compacting: state.layout.compacting,
-})
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  add(type) {
-    return dispatch(
-      Actions.toggleBlockEditor({
-        visible: true,
-        form: { type },
-      })
-    )
-  },
-
-  editSettings() {
-    return dispatch(
-      Actions.toggleSettingsEditor({
-        visible: true,
-      })
-    )
-  },
-
-  toggleEditing(toState) {
-    return dispatch(Actions.toggleEditing(toState))
-  },
-
-  toggleCompacting(toState) {
-    return dispatch(Actions.toggleCompacting(toState))
-  },
-
-  download() {
-    return dispatch(Actions.download())
-  },
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Controls)
+export default Controls

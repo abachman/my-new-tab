@@ -1,6 +1,5 @@
-import React from "react"
 import PropTypes from "prop-types"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import Button from "react-bootstrap/lib/Button"
 import Glyphicon from "react-bootstrap/lib/Glyphicon"
 import ButtonGroup from "react-bootstrap/lib/ButtonGroup"
@@ -16,18 +15,40 @@ const DragLayer = ({ editing }) => {
 }
 
 export const GridBlockWrapper = (Subtype) => {
-  class GBW extends React.Component {
-    static propTypes = {
-      block: PropTypes.object.isRequired,
+  const GBW = (props) => {
+    const dispatch = useDispatch()
+    const editing = useSelector((state) => state.layout.editing)
+    const { block } = props
+
+    const edit = (b) =>
+      dispatch(
+        Actions.toggleBlockEditor({
+          visible: true,
+          form: Object.assign({}, b),
+        })
+      )
+
+    const destroy = (b) => dispatch(Actions.destroyBlock(b))
+
+    const freeze = (b) =>
+      dispatch(Actions.modifyBlockLayout(b, { static: true }))
+
+    const style = () => {
+      const { background_color, transparent_background } = block
+      let background = background_color
+      if (transparent_background === "1" || !background) {
+        background = "transparent"
+      }
+      return { background }
     }
 
-    constructor(...props) {
-      super(...props)
-      this.state = { data: null }
-    }
+    const bgClass = () =>
+      Color.hexIsLight(style().background) ? "bg-light" : "bg-dark"
 
-    editButtons() {
-      const { editing, edit, destroy, freeze, block } = this.props
+    const borderClass = () =>
+      block.show_border === "1" ? "bordered" : ""
+
+    const editButtons = () => {
       if (!editing) return null
 
       return (
@@ -35,9 +56,7 @@ export const GridBlockWrapper = (Subtype) => {
           <Tip label="Edit">
             <Button
               bsSize="small"
-              onClick={() => {
-                edit(block)
-              }}
+              onClick={() => edit(block)}
               title="Edit"
             >
               <Glyphicon glyph="pencil" />
@@ -47,11 +66,9 @@ export const GridBlockWrapper = (Subtype) => {
             <Button
               bsSize="small"
               bsStyle="info"
-              onClick={() => {
-                freeze(block)
-              }}
+              onClick={() => freeze(block)}
               title="Edit"
-              active={this.props.block.static}
+              active={block.static}
             >
               <Glyphicon glyph="pushpin" />
             </Button>
@@ -60,9 +77,7 @@ export const GridBlockWrapper = (Subtype) => {
             <Button
               bsSize="small"
               bsStyle="danger"
-              onClick={() => {
-                destroy(block)
-              }}
+              onClick={() => destroy(block)}
               title="Remove"
             >
               <Glyphicon glyph="remove" />
@@ -72,66 +87,21 @@ export const GridBlockWrapper = (Subtype) => {
       )
     }
 
-    componentDidMount() {
-      this.setState({ data: "Hello" })
-    }
+    const blockStyle = style()
+    const className = `item block-item ${bgClass()} ${borderClass()} ${block.type}`
 
-    style() {
-      const { background_color, transparent_background } = this.props.block
-
-      let background = background_color
-
-      if (transparent_background === "1" || !background) {
-        background = "transparent"
-      }
-
-      return { background }
-    }
-
-    bgClass() {
-      return Color.hexIsLight(this.style().background) ? "bg-light" : "bg-dark"
-    }
-
-    borderClass() {
-      return this.props.block.show_border === "1" ? "bordered" : ""
-    }
-
-    render() {
-      const className = `item block-item ${this.bgClass()} ${this.borderClass()} ${
-        this.props.block.type
-      }`
-      return (
-        <div className={className} style={this.style()}>
-          {this.editButtons()}
-          <DragLayer {...this.props} />
-          <Subtype {...this.props} styles={this.style()} />
-        </div>
-      )
-    }
+    return (
+      <div className={className} style={blockStyle}>
+        {editButtons()}
+        <DragLayer editing={editing} />
+        <Subtype {...props} editing={editing} styles={blockStyle} />
+      </div>
+    )
   }
 
-  const mapStateToProps = (state) => ({
-    editing: state.layout.editing,
-  })
+  GBW.propTypes = {
+    block: PropTypes.object.isRequired,
+  }
 
-  const mapDispatchToProps = (dispatch, ownProps) => ({
-    edit(block) {
-      return dispatch(
-        Actions.toggleBlockEditor({
-          visible: true,
-          form: Object.assign({}, block),
-        })
-      )
-    },
-
-    destroy(block) {
-      return dispatch(Actions.destroyBlock(block))
-    },
-
-    freeze(block) {
-      return dispatch(Actions.modifyBlockLayout(block, { static: true }))
-    },
-  })
-
-  return connect(mapStateToProps, mapDispatchToProps)(sized(GBW))
+  return sized(GBW)
 }

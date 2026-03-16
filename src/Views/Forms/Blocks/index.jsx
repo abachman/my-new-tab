@@ -1,6 +1,6 @@
-import React from "react"
+import { useRef } from "react"
 import PropTypes from "prop-types"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import Modal from "react-bootstrap/lib/Modal"
 import Button from "react-bootstrap/lib/Button"
 
@@ -12,134 +12,110 @@ import Template from "./Template"
 
 import Actions from "../../../actions"
 
-// Block editing form wrapper
-class Blocks extends React.Component {
-  static propTypes = {
-    editing: PropTypes.bool,
-    form: PropTypes.object,
+const Blocks = () => {
+  const dispatch = useDispatch()
+  const editing = useSelector((state) => state.forms.blocks.visible)
+  const form = useSelector((state) => state.forms.blocks.form)
+  const fieldsRef = useRef({})
+  const previewRef = useRef(null)
+
+  const close = () => {
+    dispatch(
+      Actions.toggleBlockEditor({
+        visible: false,
+        form: {},
+      })
+    )
   }
 
-  constructor(...args) {
-    super(...args)
-    this.fields = {}
-  }
-
-  save() {
-    const form = {}
+  const save = () => {
+    const formData = {}
     let imageField = null
 
-    Object.entries(this.fields).forEach((kv) => {
+    Object.entries(fieldsRef.current).forEach((kv) => {
       const f = kv[1]
 
       if (f.type === "checkbox") {
-        form[f.name] = f.checked ? "1" : "0"
+        formData[f.name] = f.checked ? "1" : "0"
       } else if (f.type === "file") {
         if (f.files && f.files[0]) {
           imageField = f
         }
       } else {
-        form[f.name] = f.value
+        formData[f.name] = f.value
       }
     })
 
     const finish = (fm) => {
-      this.props.save(fm)
-      this.fields = {}
-      this.props.close()
+      if (fm.id && fm.id.length > 0) {
+        dispatch(Actions.updateBlock(fm.id, { ...fm }))
+      } else {
+        delete fm["id"]
+        dispatch(Actions.createBlock(fm))
+      }
+      fieldsRef.current = {}
+      close()
     }
 
     if (imageField) {
-      // don't save until image is uploaded
       uploadImage(imageField, function (dataUrl) {
-        form[imageField.name] = dataUrl
-        finish(form)
+        formData[imageField.name] = dataUrl
+        finish(formData)
       })
     } else {
-      finish(form)
+      finish(formData)
     }
   }
 
-  register(input) {
-    if (input) this.fields[input.name] = input
+  const register = (input) => {
+    if (input) fieldsRef.current[input.name] = input
   }
 
-  form() {
-    const { form } = this.props
+  const renderForm = () => {
     switch (form.type) {
       case "clock":
-        return <Clock refCb={this.register.bind(this)} form={form} />
+        return <Clock refCb={register} form={form} />
       case "weather":
-        return <Weather refCb={this.register.bind(this)} form={form} />
+        return <Weather refCb={register} form={form} />
       case "link":
-        return <Link refCb={this.register.bind(this)} form={form} />
+        return <Link refCb={register} form={form} />
       case "template":
-        return <Template refCb={this.register.bind(this)} form={form} />
+        return <Template refCb={register} form={form} />
       default:
-        return <Link refCb={this.register.bind(this)} form={form} />
+        return <Link refCb={register} form={form} />
     }
   }
 
-  render() {
-    const { editing, form } = this.props
-
-    if (!editing) {
-      return <div />
-    }
-
-    const ref = this.register.bind(this)
-
-    return (
-      <Modal show={true} onHide={this.props.close}>
-        <Modal.Header closeButton>
-          <Modal.Title>{form.type.toUpperCase()}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <input ref={ref} value={form.id} type="hidden" name="id" />
-          <input ref={ref} value={form.type} type="hidden" name="type" />
-
-          {this.form()}
-
-          <div ref="item_preview" className="row"></div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.props.close}>Cancel</Button>
-          <Button onClick={this.save.bind(this)} bsStyle="primary">
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    )
+  if (!editing) {
+    return <div />
   }
+
+  return (
+    <Modal show={true} onHide={close}>
+      <Modal.Header closeButton>
+        <Modal.Title>{form.type.toUpperCase()}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <input ref={register} value={form.id} type="hidden" name="id" readOnly />
+        <input ref={register} value={form.type} type="hidden" name="type" readOnly />
+
+        {renderForm()}
+
+        <div ref={previewRef} className="row"></div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={close}>Cancel</Button>
+        <Button onClick={save} bsStyle="primary">
+          Save
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    editing: state.forms.blocks.visible,
-    form: state.forms.blocks.form,
-  }
+Blocks.propTypes = {
+  editing: PropTypes.bool,
+  form: PropTypes.object,
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    close() {
-      dispatch(
-        Actions.toggleBlockEditor({
-          // hide and clear
-          visible: false,
-          form: {},
-        })
-      )
-    },
-
-    save(block) {
-      if (block.id && block.id.length > 0) {
-        dispatch(Actions.updateBlock(block.id, { ...block }))
-      } else {
-        delete block["id"]
-        dispatch(Actions.createBlock(block))
-      }
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Blocks)
+export default Blocks

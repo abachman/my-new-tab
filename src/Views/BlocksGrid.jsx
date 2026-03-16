@@ -1,6 +1,6 @@
-import React from "react"
+import { useState, useEffect } from "react"
 import PropTypes from "prop-types"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { Responsive, WidthProvider } from "react-grid-layout"
 
 import Actions from "actions"
@@ -24,7 +24,6 @@ import "stylesheets/Blocks.css"
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 // Dynamic Column Allocation
-
 const STEP = 80
 const COLS = {}
 const BREAKPOINTS = {}
@@ -34,120 +33,81 @@ for (let i = 1; i < 16; i += 2) {
   BREAKPOINTS[lbl] = i * STEP
 }
 
-class BlocksGrid extends React.Component {
-  static propTypes = {
-    blocks: PropTypes.object.isRequired,
+const BlocksGrid = () => {
+  const dispatch = useDispatch()
+  const blocks = useSelector((state) => state.blocks)
+  const layouts = useSelector((state) => state.layouts)
+  const editing = useSelector((state) => state.layout.editing)
+  const compacting = useSelector((state) => state.layout.compacting)
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setReady(true), 1000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  const onLayoutChange = (layout, layoutsMap) => {
+    log("onLayoutChange", layout, layoutsMap)
+    dispatch(Actions.updateLayouts(layoutsMap))
   }
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      layout: {},
-      breakpoint: null,
-      ready: false,
-    }
-
-    this.onLayoutChange = this.onLayoutChange.bind(this)
-    this.onBreakpointChange = this.onBreakpointChange.bind(this)
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ ready: true })
-    }, 1000)
-  }
-
-  updateBlockItem(item) {
-    const id = item.i
-
-    this.props.dispatch(
-      Actions.updateBlock(id, {
-        coords: { ...item },
-      })
-    )
-  }
-
-  onLayoutChange(layout, layouts) {
-    log("onLayoutChange", layout, layouts)
-    this.props.dispatch(Actions.updateLayouts(layouts))
-  }
-
-  onBreakpointChange(breakpoint) {
+  const onBreakpointChange = (breakpoint) => {
     log("onBreakpointChange", breakpoint)
-    this.props.dispatch(Actions.setBreakpoint(breakpoint))
+    dispatch(Actions.setBreakpoint(breakpoint))
   }
 
-  selectView(block) {
-    let blockView
+  const selectView = (block) => {
     switch (block.type) {
       case "clock":
-        blockView = <Clock block={block} />
-        break
+        return <Clock block={block} />
       case "weather":
-        blockView = <Weather block={block} />
-        break
+        return <Weather block={block} />
       case "bookmarks":
-        blockView = <Bookmarks block={block} />
-        break
+        return <Bookmarks block={block} />
       case "feed":
       case "link":
-        blockView = <Link block={block} />
-        break
+        return <Link block={block} />
       case "userscript":
-        blockView = <Bare block={block} />
-        break
+        return <Bare block={block} />
       case "template":
-        blockView = <Template block={block} />
-        break
+        return <Template block={block} />
       default:
-        blockView = <Link block={block} />
-        break
+        return <Link block={block} />
     }
-    return blockView
   }
 
-  renderBlocks() {
-    return Object.entries(this.props.blocks).map((kv, idx) => {
+  const renderBlocks = () =>
+    Object.entries(blocks).map((kv) => {
       const id = kv[0],
         block = kv[1]
-      return <div key={id}>{this.selectView(block)}</div>
+      return <div key={id}>{selectView(block)}</div>
     })
-  }
 
-  render() {
-    const { editing } = this.props
-    const className = "grid-layout " + (this.state.ready ? "ready" : "unready")
+  const className = "grid-layout " + (ready ? "ready" : "unready")
 
-    return (
-      <ResponsiveReactGridLayout
-        className={className}
-        autoSize={true}
-        measureBeforeMount={true}
-        isDraggable={editing}
-        isResizable={editing}
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
-        layouts={this.props.layouts}
-        containerPadding={[0, 0]}
-        onLayoutChange={this.onLayoutChange}
-        onBreakpointChange={this.onBreakpointChange}
-        compactType={this.props.compacting ? "vertical" : null}
-        rowHeight={80}
-      >
-        {this.renderBlocks()}
-      </ResponsiveReactGridLayout>
-    )
-  }
+  return (
+    <ResponsiveReactGridLayout
+      className={className}
+      autoSize={true}
+      measureBeforeMount={true}
+      isDraggable={editing}
+      isResizable={editing}
+      breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+      cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+      layouts={layouts}
+      containerPadding={[0, 0]}
+      onLayoutChange={onLayoutChange}
+      onBreakpointChange={onBreakpointChange}
+      compactType={compacting ? "vertical" : null}
+      rowHeight={80}
+    >
+      {renderBlocks()}
+    </ResponsiveReactGridLayout>
+  )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    blocks: state.blocks,
-    layouts: state.layouts,
-    editing: state.layout.editing,
-    compacting: state.layout.compacting,
-  }
+BlocksGrid.propTypes = {
+  blocks: PropTypes.object,
 }
 
-export default connect(mapStateToProps)(BlocksGrid)
+export default BlocksGrid

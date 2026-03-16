@@ -1,60 +1,53 @@
-import React from "react"
+import { useRef, useEffect } from "react"
 import PropTypes from "prop-types"
-import ReactDOM from "react-dom"
 
 import { setImageOnCanvas } from "../../lib/images"
 import { GridBlockWrapper } from "./Base"
 
-class LinkImage extends React.Component {
-  componentDidUpdate() {
-    this.renderImage()
-  }
+const LinkImage = ({ imageData, size }) => {
+  const canvasRef = useRef(null)
+  const { width, height } = size
+  const style = { width: width + "px", height: height + "px" }
 
-  renderImage() {
-    const canvas = ReactDOM.findDOMNode(this)
-    setImageOnCanvas(canvas, this.props.imageData)
-  }
+  useEffect(() => {
+    if (canvasRef.current) {
+      setImageOnCanvas(canvasRef.current, imageData)
+    }
+  }, [imageData, width, height])
 
-  render() {
-    const { width, height } = this.props.size
-    const style = { width: width + "px", height: height + "px" }
-
-    return (
-      <canvas
-        className="item-image"
-        width={width}
-        height={height}
-        style={style}
-      ></canvas>
-    )
-  }
+  return (
+    <canvas
+      ref={canvasRef}
+      className="item-image"
+      width={width}
+      height={height}
+      style={style}
+    ></canvas>
+  )
 }
 
-class Link extends React.Component {
-  static propTypes = {
-    block: PropTypes.object.isRequired,
-  }
+const Link = ({ size, block }) => {
+  const { label, url, image_upload, hide_label } = block
 
-  render() {
-    const { size, block } = this.props
-    const { label, url, image_upload, hide_label } = block
+  const labelTag =
+    hide_label !== "1" ? <span className="item-label">{label}</span> : null
 
-    const labelTag =
-      hide_label !== "1" ? <span className="item-label">{label}</span> : null
+  const imageTag = image_upload ? (
+    <LinkImage imageData={image_upload} block={block} size={size} />
+  ) : null
 
-    const imageTag = image_upload ? (
-      <LinkImage imageData={image_upload} block={block} size={size} />
-    ) : null
+  return (
+    <a className="link-link" href={url}>
+      <div className="item-container">
+        {imageTag}
+        {labelTag}
+      </div>
+    </a>
+  )
+}
 
-    return (
-      <a className="link-link" href={url}>
-        <div className="item-container">
-          {imageTag}
-          {labelTag}
-        </div>
-      </a>
-    )
-  }
+Link.propTypes = {
+  block: PropTypes.object.isRequired,
 }
 
 export default GridBlockWrapper(Link)

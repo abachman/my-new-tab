@@ -1,50 +1,36 @@
-import React from "react"
+import { useEffect } from "react"
 import PropTypes from "prop-types"
-import { connect } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 import Actions from "../../actions"
 import { GridBlockWrapper } from "./Base"
-import Color from "../../lib/Color"
 
-class Feed extends React.Component {
-  static propTypes = {
-    block: PropTypes.object.isRequired,
-  }
+const Feed = ({ size, block, styles }) => {
+  const dispatch = useDispatch()
+  const entries = useSelector((state) => state.feeds[block.id])
+  const { label } = block
 
-  componentDidMount() {
-    this.props.fetch()
-  }
+  useEffect(() => {
+    dispatch(Actions.getFeed(block.id))
+  }, [])
 
-  render() {
-    const { size, block, styles } = this.props
-    const { label } = block
-
-    return (
-      <a className="block-block" href={url}>
-        <div className="item-container">
-          <LinkImage
-            imageData={image}
-            block={block}
-            width={size.width}
-            height={size.height}
-          />
-          {hide_label === "1" ? "" : labelTag}
-        </div>
-      </a>
-    )
-  }
+  return (
+    <a className="block-block" href={url}>
+      <div className="item-container">
+        <LinkImage
+          imageData={image}
+          block={block}
+          width={size.width}
+          height={size.height}
+        />
+        {hide_label === "1" ? "" : labelTag}
+      </div>
+    </a>
+  )
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    entries: state.feeds[ownProps.block.id],
-  }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    fetch: () => dispatch(Actions.getFeed(ownProps.block.id)),
-  }
+Feed.propTypes = {
+  block: PropTypes.object.isRequired,
 }
 
 export default GridBlockWrapper(Feed)
