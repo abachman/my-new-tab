@@ -14,6 +14,7 @@ import {
 const Settings = () => {
   const dispatch = useDispatch()
   const editing = useSelector((state) => state.forms.settings.visible)
+  const colorScheme = useSelector((s) => s.settings.colorScheme || 'system')
 
   const [importError, setImportError] = useState(null)
   const [importSuccess, setImportSuccess] = useState(false)
@@ -80,6 +81,22 @@ const Settings = () => {
         <Modal.Title>Settings</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <h4>Appearance</h4>
+        <div style={{ marginBottom: "20px" }}>
+          <label htmlFor="color-scheme-select">Color Scheme</label>
+          <select
+            id="color-scheme-select"
+            className="form-control"
+            value={colorScheme}
+            onChange={(e) => dispatch(Actions.updateSettings({ colorScheme: e.target.value }))}
+            style={{ marginTop: "6px" }}
+          >
+            <option value="system">System (default)</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+
         <h4>Backup &amp; Restore</h4>
 
         {importError && (

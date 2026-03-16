@@ -6,7 +6,9 @@ const DefaultState = {
   block_cache: {},
   block_state: {},
 
-  settings: {},
+  settings: {
+    colorScheme: 'system',
+  },
 
   layout: {
     coords: {},
@@ -122,7 +124,7 @@ const layouts = handleActions(
 const settings = handleActions(
   {
     UPDATE_SETTINGS(state, { payload }) {
-      return payload
+      return { ...state, ...payload }
     },
   },
   DefaultState.settings

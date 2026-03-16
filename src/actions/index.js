@@ -90,6 +90,11 @@ Actions.updateLayouts = (layouts) => {
   }
 }
 
+Actions.updateSettings = (patch) => ({
+  type: "UPDATE_SETTINGS",
+  payload: patch,
+})
+
 Actions.setBreakpoint = (breakpoint) => {
   return {
     type: "SET_BREAKPOINT",
