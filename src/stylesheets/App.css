@@ -41,6 +41,7 @@ body.dark-mode {
   --input-bg: #3a3a3a;
   --input-color: #e0e0e0;
   --input-border: #555555;
+  --help-text-color: #999999;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -59,6 +60,7 @@ body.dark-mode {
     --input-bg: #3a3a3a;
     --input-color: #e0e0e0;
     --input-border: #555555;
+    --help-text-color: #999999;
   }
 }
 
@@ -126,6 +128,11 @@ body.system-mode .form-control {
 body.dark-mode label,
 body.system-mode label {
   color: var(--text-color);
+}
+
+body.dark-mode .help-block,
+body.system-mode .help-block {
+  color: var(--help-text-color);
 }
 
 body.dark-mode h4,
