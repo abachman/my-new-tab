@@ -16,8 +16,8 @@ const fontFamilyOptions = () =>
 
 const Clock = ({ refCb, form }) => (
   <form rel="form">
-    <div className="form-group">
-      <label htmlFor="fontFamily" className="control-label">
+    <div className="mb-3">
+      <label htmlFor="fontFamily" className="form-label">
         Font Family:
       </label>
       <select
@@ -30,8 +30,8 @@ const Clock = ({ refCb, form }) => (
       </select>
     </div>
 
-    <div className="form-group">
-      <label htmlFor="background_color" className="control-label">
+    <div className="mb-3">
+      <label htmlFor="background_color" className="form-label">
         Color:
       </label>
       <input

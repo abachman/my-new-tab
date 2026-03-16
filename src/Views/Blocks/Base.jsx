@@ -1,8 +1,6 @@
 import PropTypes from "prop-types"
 import { useSelector, useDispatch } from "react-redux"
-import Button from "react-bootstrap/lib/Button"
-import Glyphicon from "react-bootstrap/lib/Glyphicon"
-import ButtonGroup from "react-bootstrap/lib/ButtonGroup"
+import { Button, ButtonGroup } from "react-bootstrap"
 
 import Color from "lib/Color"
 import Actions from "actions"
@@ -43,10 +41,9 @@ export const GridBlockWrapper = (Subtype) => {
     }
 
     const bgClass = () =>
-      Color.hexIsLight(style().background) ? "bg-light" : "bg-dark"
+      Color.hexIsLight(style().background) ? "bg-is-light" : "bg-is-dark"
 
-    const borderClass = () =>
-      block.show_border === "1" ? "bordered" : ""
+    const borderClass = () => (block.show_border === "1" ? "bordered" : "")
 
     const editButtons = () => {
       if (!editing) return null
@@ -54,33 +51,29 @@ export const GridBlockWrapper = (Subtype) => {
       return (
         <ButtonGroup className="item-controls">
           <Tip label="Edit">
-            <Button
-              bsSize="small"
-              onClick={() => edit(block)}
-              title="Edit"
-            >
-              <Glyphicon glyph="pencil" />
+            <Button size="sm" onClick={() => edit(block)} title="Edit">
+              <i className="bi bi-pencil" />
             </Button>
           </Tip>
           <Tip label="Freeze">
             <Button
-              bsSize="small"
-              bsStyle="info"
+              size="sm"
+              variant="info"
               onClick={() => freeze(block)}
               title="Edit"
               active={block.static}
             >
-              <Glyphicon glyph="pushpin" />
+              <i className="bi bi-pin-angle" />
             </Button>
           </Tip>
           <Tip label="Remove">
             <Button
-              bsSize="small"
-              bsStyle="danger"
+              size="sm"
+              variant="danger"
               onClick={() => destroy(block)}
               title="Remove"
             >
-              <Glyphicon glyph="remove" />
+              <i className="bi bi-x" />
             </Button>
           </Tip>
         </ButtonGroup>

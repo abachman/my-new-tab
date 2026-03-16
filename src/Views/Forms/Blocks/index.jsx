@@ -1,8 +1,7 @@
 import { useRef } from "react"
 import PropTypes from "prop-types"
 import { useSelector, useDispatch } from "react-redux"
-import Modal from "react-bootstrap/lib/Modal"
-import Button from "react-bootstrap/lib/Button"
+import { Modal, Button } from "react-bootstrap"
 
 import { uploadImage } from "../../../lib/images"
 import Link from "./Link"
@@ -105,7 +104,7 @@ const Blocks = () => {
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={close}>Cancel</Button>
-        <Button onClick={save} bsStyle="primary">
+        <Button onClick={save} variant="primary">
           Save
         </Button>
       </Modal.Footer>
