@@ -6,3 +6,144 @@
 iframe {
   display: none;
 }
+
+/* === Dark mode styles === */
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --modal-bg: #ffffff;
+  --modal-header-bg: #f5f5f5;
+  --modal-footer-bg: #f5f5f5;
+  --modal-border-color: #e5e5e5;
+  --block-border-color: #dddddd;
+  --btn-default-bg: #ffffff;
+  --btn-default-border: #cccccc;
+  --btn-default-color: #333333;
+  --controls-bg: rgba(255, 255, 255, 0.9);
+  --input-bg: #ffffff;
+  --input-color: #555555;
+  --input-border: #cccccc;
+}
+
+body.dark-mode {
+  --bg-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --modal-bg: #2a2a2a;
+  --modal-header-bg: #222222;
+  --modal-footer-bg: #222222;
+  --modal-border-color: #444444;
+  --block-border-color: #444444;
+  --btn-default-bg: #3a3a3a;
+  --btn-default-border: #555555;
+  --btn-default-color: #e0e0e0;
+  --controls-bg: rgba(30, 30, 30, 0.9);
+  --input-bg: #3a3a3a;
+  --input-color: #e0e0e0;
+  --input-border: #555555;
+}
+
+@media (prefers-color-scheme: dark) {
+  body.system-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --modal-bg: #2a2a2a;
+    --modal-header-bg: #222222;
+    --modal-footer-bg: #222222;
+    --modal-border-color: #444444;
+    --block-border-color: #444444;
+    --btn-default-bg: #3a3a3a;
+    --btn-default-border: #555555;
+    --btn-default-color: #e0e0e0;
+    --controls-bg: rgba(30, 30, 30, 0.9);
+    --input-bg: #3a3a3a;
+    --input-color: #e0e0e0;
+    --input-border: #555555;
+  }
+}
+
+body.dark-mode,
+body.system-mode {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+@media (prefers-color-scheme: light) {
+  body.system-mode {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+}
+
+body.dark-mode .modal-content,
+body.system-mode .modal-content {
+  background-color: var(--modal-bg);
+  color: var(--text-color);
+  border-color: var(--modal-border-color);
+}
+
+body.dark-mode .modal-header,
+body.system-mode .modal-header {
+  background-color: var(--modal-header-bg);
+  border-bottom-color: var(--modal-border-color);
+}
+
+body.dark-mode .modal-footer,
+body.system-mode .modal-footer {
+  background-color: var(--modal-footer-bg);
+  border-top-color: var(--modal-border-color);
+}
+
+body.dark-mode .modal-title,
+body.system-mode .modal-title {
+  color: var(--text-color);
+}
+
+body.dark-mode .btn-default,
+body.system-mode .btn-default {
+  background-color: var(--btn-default-bg);
+  border-color: var(--btn-default-border);
+  color: var(--btn-default-color);
+}
+
+body.dark-mode .btn-default:hover,
+body.system-mode .btn-default:hover {
+  background-color: var(--btn-default-border);
+}
+
+body.dark-mode .block-item.bordered,
+body.system-mode .block-item.bordered {
+  border-color: var(--block-border-color);
+}
+
+body.dark-mode .form-control,
+body.system-mode .form-control {
+  background-color: var(--input-bg);
+  color: var(--input-color);
+  border-color: var(--input-border);
+}
+
+body.dark-mode label,
+body.system-mode label {
+  color: var(--text-color);
+}
+
+body.dark-mode h4,
+body.dark-mode h5,
+body.system-mode h4,
+body.system-mode h5 {
+  color: var(--text-color);
+}
+
+body.dark-mode .close,
+body.system-mode .close {
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+body.dark-mode select,
+body.system-mode select {
+  background-color: var(--input-bg);
+  color: var(--input-color);
+  border-color: var(--input-border);
+}
