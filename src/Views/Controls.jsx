@@ -60,7 +60,7 @@ const Controls = () => {
   }
 
   return (
-    <div className="row controls">
+    <div className="row mt-4 controls">
       <div className="col-md-12">
         <CreateMenu onCreate={add} />
 
