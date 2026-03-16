@@ -1,32 +1,25 @@
-import React from "react"
 import PropTypes from "prop-types"
-// import ReactDOM from 'react-dom'
 
-// import { setImageOnCanvas } from '../../lib/images'
 import { GridBlockWrapper } from "./Base"
-// echo 'ping'
 
-class Bookmarks extends React.Component {
-  static propTypes = {
-    size: PropTypes.object,
-    block: PropTypes.object,
-  }
+const Bookmarks = ({ size, block }) => {
+  const { fontFamily } = block
 
-  render() {
-    const { size, block } = this.props
-    const { fontFamily } = block
+  return (
+    <div
+      className="listing item-container"
+      style={{ fontFamily: fontFamily }}
+    >
+      <p>
+        Bookmarks go here. <span>{JSON.stringify(size)}</span>
+      </p>
+    </div>
+  )
+}
 
-    return (
-      <div
-        className="listing item-container"
-        style={{ fontFamily: fontFamily }}
-      >
-        <p>
-          Bookmarks go here. <span>{JSON.stringify(size)}</span>
-        </p>
-      </div>
-    )
-  }
+Bookmarks.propTypes = {
+  size: PropTypes.object,
+  block: PropTypes.object,
 }
 
 export default GridBlockWrapper(Bookmarks)

@@ -1,16 +1,11 @@
-import React from "react"
 import PropTypes from "prop-types"
 
 import { GridBlockWrapper } from "./Base"
 
-class Bare extends React.Component {
-  static propTypes = {
-    block: PropTypes.object.isRequired,
-  }
+const Bare = ({ block }) => <div className="item-container" />
 
-  render() {
-    return <div className="item-container" />
-  }
+Bare.propTypes = {
+  block: PropTypes.object.isRequired,
 }
 
 export default GridBlockWrapper(Bare)
