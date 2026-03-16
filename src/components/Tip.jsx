@@ -1,6 +1,5 @@
 import React from "react"
-import OverlayTrigger from "react-bootstrap/lib/OverlayTrigger"
-import Tooltip from "react-bootstrap/lib/Tooltip"
+import { OverlayTrigger, Tooltip } from "react-bootstrap"
 
 let count = 0
 

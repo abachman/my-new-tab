@@ -1,25 +1,27 @@
 import { useSelector, useDispatch } from "react-redux"
-import Glyphicon from "react-bootstrap/lib/Glyphicon"
-import MenuItem from "react-bootstrap/lib/MenuItem"
-import Dropdown from "react-bootstrap/lib/Dropdown"
-import Button from "react-bootstrap/lib/Button"
+import { Dropdown, Button } from "react-bootstrap"
 
 import Tip from "../components/Tip"
 import Actions from "../actions"
+import { useColorScheme } from "hooks/useColorScheme"
 
 const CreateMenu = ({ onCreate }) => {
   return (
     <Dropdown id="add-block-menu">
-      <Dropdown.Toggle bsStyle="success" data-testid="add-block">
-        <Glyphicon glyph="plus" />
+      <Dropdown.Toggle variant="success" data-testid="add-block">
+        <i className="bi bi-plus" />
       </Dropdown.Toggle>
-      <Dropdown.Menu className="super-colors">
-        <MenuItem onClick={() => onCreate("link")}>Link</MenuItem>
-        <MenuItem onClick={() => onCreate("weather")}>Weather</MenuItem>
-        <MenuItem onClick={() => onCreate("clock")}>Clock</MenuItem>
-        <MenuItem onClick={() => onCreate("template")}>Template</MenuItem>
-        {/* <MenuItem onClick={() => onCreate('bookmarks')}>Bookmarks</MenuItem> */}
-        {/* <MenuItem onClick={() => onCreate('feed')}>News Feed</MenuItem> */}
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={() => onCreate("link")}>Link</Dropdown.Item>
+        <Dropdown.Item onClick={() => onCreate("weather")}>
+          Weather
+        </Dropdown.Item>
+        <Dropdown.Item onClick={() => onCreate("clock")}>Clock</Dropdown.Item>
+        <Dropdown.Item onClick={() => onCreate("template")}>
+          Template
+        </Dropdown.Item>
+        {/* <Dropdown.Item onClick={() => onCreate('bookmarks')}>Bookmarks</Dropdown.Item> */}
+        {/* <Dropdown.Item onClick={() => onCreate('feed')}>News Feed</Dropdown.Item> */}
       </Dropdown.Menu>
     </Dropdown>
   )
@@ -47,11 +49,11 @@ const Controls = () => {
       <Tip label="Toggle vertical compacting">
         <Button
           onClick={toggleCompacting}
-          bsStyle={compacting ? "info" : "default"}
+          variant={compacting ? "info" : "secondary"}
           title="Compact"
           active={compacting}
         >
-          <Glyphicon glyph="eject" />
+          <i className="bi bi-eject" />
         </Button>
       </Tip>
     )
@@ -65,23 +67,19 @@ const Controls = () => {
         <Tip label="Toggle editing mode">
           <Button
             onClick={toggleEditing}
-            bsStyle="info"
+            variant="info"
             title="Edit"
             active={editing}
           >
-            <Glyphicon glyph="pencil" />
+            <i className="bi bi-pencil" />
           </Button>
         </Tip>
 
         {compactingButton()}
 
         <Tip label="Edit settings">
-          <Button
-            onClick={editSettings}
-            bsStyle="default"
-            title="Settings"
-          >
-            <Glyphicon glyph="wrench" />
+          <Button onClick={editSettings} variant="secondary" title="Settings">
+            <i className="bi bi-wrench" />
           </Button>
         </Tip>
       </div>

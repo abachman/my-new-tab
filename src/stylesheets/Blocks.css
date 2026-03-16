@@ -1,12 +1,12 @@
-.bg-dark .item-container,
-.bg-dark .item-container p,
-.bg-dark .item-container a {
+.bg-is-dark .item-container,
+.bg-is-dark .item-container p,
+.bg-is-dark .item-container a {
   color: #ffffff;
 }
 
-.bg-light .item-container,
-.bg-light .item-container p,
-.bg-light .item-container a {
+.bg-is-light .item-container,
+.bg-is-light .item-container p,
+.bg-is-light .item-container a {
   color: #333333;
 }
 
@@ -18,6 +18,10 @@
   top: 0;
   left: 0;
   z-index: 9001;
+}
+
+#add-block-menu {
+  display: inline-block;
 }
 
 .controls {

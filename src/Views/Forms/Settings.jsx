@@ -1,9 +1,7 @@
 import { useState } from "react"
 import PropTypes from "prop-types"
 import { useSelector, useDispatch } from "react-redux"
-import Modal from "react-bootstrap/lib/Modal"
-import Button from "react-bootstrap/lib/Button"
-import Alert from "react-bootstrap/lib/Alert"
+import { Modal, Button, Alert } from "react-bootstrap"
 
 import Actions from "../../actions"
 import {
@@ -100,19 +98,19 @@ const Settings = () => {
         <h4>Backup &amp; Restore</h4>
 
         {importError && (
-          <Alert bsStyle="danger">
+          <Alert variant="danger">
             <strong>Import Error:</strong> {importError}
           </Alert>
         )}
 
         {importSuccess && (
-          <Alert bsStyle="success">
+          <Alert variant="success">
             <strong>Success!</strong> Your data has been imported.
           </Alert>
         )}
 
         {pendingImport && (
-          <Alert bsStyle="warning">
+          <Alert variant="warning">
             <strong>Confirm Import</strong>
             <p>
               This will replace all your current blocks, layouts, and
@@ -120,7 +118,7 @@ const Settings = () => {
             </p>
             <div style={{ marginTop: "10px" }}>
               <Button
-                bsStyle="danger"
+                variant="danger"
                 onClick={handleConfirmImport}
                 style={{ marginRight: "10px" }}
               >
@@ -134,7 +132,7 @@ const Settings = () => {
         <div style={{ marginBottom: "20px" }}>
           <h5>Export</h5>
           <p>Download a backup of all your blocks, layouts, and settings.</p>
-          <Button bsStyle="primary" onClick={handleExport}>
+          <Button variant="primary" onClick={handleExport}>
             Export Backup
           </Button>
         </div>

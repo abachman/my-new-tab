@@ -29,6 +29,7 @@ iframe {
 body.dark-mode {
   --bg-color: #1a1a1a;
   --text-color: #e0e0e0;
+  --bs-secondary-color: #ababab;
   --modal-bg: #2a2a2a;
   --modal-header-bg: #222222;
   --modal-footer-bg: #222222;
@@ -101,15 +102,15 @@ body.system-mode .modal-title {
   color: var(--text-color);
 }
 
-body.dark-mode .btn-default,
-body.system-mode .btn-default {
+body.dark-mode .btn-secondary,
+body.system-mode .btn-secondary {
   background-color: var(--btn-default-bg);
   border-color: var(--btn-default-border);
   color: var(--btn-default-color);
 }
 
-body.dark-mode .btn-default:hover,
-body.system-mode .btn-default:hover {
+body.dark-mode .btn-secondary:hover,
+body.system-mode .btn-secondary:hover {
   background-color: var(--btn-default-border);
 }
 
@@ -130,8 +131,8 @@ body.system-mode label {
   color: var(--text-color);
 }
 
-body.dark-mode .help-block,
-body.system-mode .help-block {
+body.dark-mode .form-text,
+body.system-mode .form-text {
   color: var(--help-text-color);
 }
 
@@ -142,9 +143,9 @@ body.system-mode h5 {
   color: var(--text-color);
 }
 
-body.dark-mode .close,
-body.system-mode .close {
-  color: var(--text-color);
+body.dark-mode .btn-close,
+body.system-mode .btn-close {
+  filter: invert(1);
   opacity: 0.8;
 }
 

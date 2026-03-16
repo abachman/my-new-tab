@@ -2,8 +2,8 @@ import PropTypes from "prop-types"
 
 const Weather = ({ refCb, form }) => (
   <form rel="form">
-    <div className="form-group">
-      <label htmlFor="location" className="control-label">
+    <div className="mb-3">
+      <label htmlFor="location" className="form-label">
         Location:
       </label>
       <input
@@ -15,8 +15,8 @@ const Weather = ({ refCb, form }) => (
       />
     </div>
 
-    <div className="form-group">
-      <label htmlFor="background_color" className="control-label">
+    <div className="mb-3">
+      <label htmlFor="background_color" className="form-label">
         Color:
       </label>
       <input

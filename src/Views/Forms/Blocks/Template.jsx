@@ -17,8 +17,8 @@ const cacheOptions = () =>
 
 const Template = ({ refCb, form }) => (
   <form rel="form">
-    <div className="form-group">
-      <label htmlFor="url" className="control-label">
+    <div className="mb-3">
+      <label htmlFor="url" className="form-label">
         URL:
       </label>
       <input
@@ -29,7 +29,7 @@ const Template = ({ refCb, form }) => (
         className="form-control"
         defaultValue={form.url}
       />
-      <label htmlFor="template" className="control-label">
+      <label htmlFor="template" className="form-label">
         Template:
       </label>
       <textarea
@@ -39,14 +39,14 @@ const Template = ({ refCb, form }) => (
         name="template"
         defaultValue={form.template}
       />
-      <p className="help-block">
+      <p className="form-text text-muted">
         Templates are HTML blocks in Liquid format. The URL given will be
         requested with fetch() and should return a JSON record which will be
         given to the template for rendering. If the API returns an array or
         any other non-JSON-curly-brace-object, it will be given to the
         template as the <code>data</code> property.
       </p>
-      <p className="help-block">
+      <p className="form-text text-muted">
         Check out{" "}
         <a href="https://shopify.github.io/liquid/">
           the Liquid template language guide
@@ -58,8 +58,8 @@ const Template = ({ refCb, form }) => (
       </p>
     </div>
 
-    <div className="form-group">
-      <label className="control-label" htmlFor="cache_timeout">
+    <div className="mb-3">
+      <label className="form-label" htmlFor="cache_timeout">
         Cache Results:
       </label>
       <select
@@ -70,7 +70,7 @@ const Template = ({ refCb, form }) => (
       >
         {cacheOptions()}
       </select>
-      <span className="help-block">
+      <span className="form-text text-muted">
         Doing expensive / slow API calls? Cache the resulting HTML and avoid
         GETs on every new tab load.
       </span>
