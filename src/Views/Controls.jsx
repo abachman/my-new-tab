@@ -77,11 +77,16 @@ class Controls extends React.Component {
           </Tip>
 
           {this.compactingButton()}
-          {/*
-          <Tip label='Edit settings'>
-            <Button onClick={this.props.editSettings}       bsStyle='default' title='Settings'><Glyphicon glyph='wrench'/></Button>
+
+          <Tip label="Edit settings">
+            <Button
+              onClick={this.props.editSettings}
+              bsStyle="default"
+              title="Settings"
+            >
+              <Glyphicon glyph="wrench" />
+            </Button>
           </Tip>
-          */}
 
           {/*
           <Tip label="Download layout">

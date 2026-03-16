@@ -1,5 +1,9 @@
 import { createActions } from "redux-actions"
 import Weather from "../lib/weather"
+import {
+  prepareExportData,
+  downloadAsFile,
+} from "../lib/storage/exportImport"
 
 function S4() {
   return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
@@ -62,12 +66,20 @@ Actions.modifyBlockLayout = (block, options = {}) => {
   }
 }
 
-Actions.download = () => {
+Actions.exportData = () => {
   return (dispatch, getState) => {
-    dispatch({
-      type: "DOWNLOAD",
-      payload: "not yet",
-    })
+    const state = getState()
+    const exportData = prepareExportData(state)
+    const timestamp = new Date().toISOString().split("T")[0]
+    const filename = `my-new-tab-backup-${timestamp}.json`
+    downloadAsFile(exportData, filename)
+  }
+}
+
+Actions.importData = (data) => {
+  return {
+    type: "IMPORT_DATA",
+    payload: data,
   }
 }
 
