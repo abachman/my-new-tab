@@ -1,6 +1,5 @@
 .DS_store
 sites.js
-dist/
 index-sample.html
 slice-*.*
 Makefile
@@ -8,12 +7,8 @@ Makefile
 credentials.sh
 
 # assets
-assets/Chrome App Icon Export.png
-assets/Chrome App Icon Export@2x.png
-assets/app-icon-128.png
-assets/app-icon.sketch/
-assets/screenshot-1280.png
-assets/screenshot-640.png
+assets/*
+!assets/screenshot.png
 
 # dependencies
 node_modules
@@ -22,7 +17,8 @@ node_modules
 coverage
 
 # production
-build
+build/
+dist/
 
 # misc
 .DS_Store
